@@ -1,7 +1,7 @@
 export default function App() {
   return (
     <div>
-      <h1>some random text</h1>
+      <h1 className="text-3xl">installed tailwindcss</h1>
     </div>
   );
 }
