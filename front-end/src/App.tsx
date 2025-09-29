@@ -1,4 +1,3 @@
-// Update the import path below if the actual file is named differently or located elsewhere
 import LoginPage from "./components/LoginPage/LoginPage";
 import LandingModal from "./components/LandingModal/LandingModal";
 import symphonyLogoImagef from "./assets/BirthdayPlanner.svg";
