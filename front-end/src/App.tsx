@@ -1,5 +1,5 @@
 import LoginPage from "./components/LoginPage/LoginPage";
-import symphonyLogoImagef from "./assets/Symphony LOGO 2024_Purple-01.png";
+import symphonyLogoImagef from "./assets/BirthdayPlanner.svg";
 
 export default function App() {
   return (
