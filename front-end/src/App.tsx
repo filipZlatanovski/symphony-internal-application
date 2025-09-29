@@ -1,7 +1,13 @@
+import LoginPage from "./components/LoginPage/LoginPage";
+import symphonyLogoImagef from "./assets/Symphony LOGO 2024_Purple-01.png";
+
 export default function App() {
   return (
-    <div>
-      <h1 className="text-3xl">installed tailwindcss</h1>
-    </div>
+    <>
+      <LoginPage
+        buttonText={"Google Auth button here"}
+        imageSrc={symphonyLogoImagef}
+      />
+    </>
   );
 }
