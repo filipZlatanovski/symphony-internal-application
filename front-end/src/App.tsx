@@ -22,11 +22,7 @@ export default function App() {
 
   return (
     <>
-      <LoginPage
-        buttonText={"Google Auth button here"}
-        imageSrc={symphonyLogoImagef}
-        onClick={handleLoginClick}
-      />
+      <LoginPage imageSrc={symphonyLogoImagef} onClick={handleLoginClick} />
       <LandingModal open={isModalOpen} onComplete={handleModalComplete} />
     </>
   );
