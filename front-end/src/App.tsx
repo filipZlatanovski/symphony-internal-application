@@ -8,7 +8,7 @@ import BirthdayModal from "./components/BirthdayModal/BirthdayModal";
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showHomepage, setShowHomepage] = useState(true); // Set to true to start with homepage
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isBdayModalOpen, setIsBdayModalOpen] = useState<boolean>(false);
 
   const handleLoginClick = () => {
     setIsModalOpen(true);
@@ -28,6 +28,14 @@ export default function App() {
     setShowHomepage(!showHomepage);
   };
 
+  const handleOpenModal = () => {
+    setIsBdayModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsBdayModalOpen(false);
+  };
+
   if (showHomepage) {
     return (
       <div>
@@ -38,28 +46,25 @@ export default function App() {
         >
           Show Login
         </button>
+        <button
+          className="fixed top-20 right-4 bg-[#fe7475] text-white px-4 py-2 rounded-lg z-50"
+          onClick={handleOpenModal}
+        >
+          SHOW BDAY MODAL
+        </button>
+        <BirthdayModal
+          open={isBdayModalOpen}
+          onClose={handleCloseModal}
+          handleOrganizeBirthday={() => {
+            console.log("random text");
+          }}
+        />
       </div>
     );
   }
 
-  const handleOpenModal = () => {
-    setIsOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsOpen(false);
-  };
-
   return (
     <div>
-      <button onClick={handleOpenModal}>Open the modal</button>
-      <BirthdayModal
-        open={isOpen}
-        onClose={handleCloseModal}
-        handleOrganizeBirthday={() => {
-          console.log("default function");
-        }}
-      />
       <LoginPage imageSrc={symphonyLogoImagef} onClick={handleLoginClick} />
       <LandingModal open={isModalOpen} onComplete={handleModalComplete} />
       <button
