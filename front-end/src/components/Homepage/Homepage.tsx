@@ -71,13 +71,13 @@ const Homepage = () => {
                 onClick={handleProfileEdit}
                 className="w-full text-left p-4 rounded-xl hover:bg-[#f4f5fb] transition-all font-[Poppins] text-gray-700 border border-gray-100 hover:border-[#6c69ff] hover:scale-105 transform duration-200"
               >
-                ✏️ Edit Profile
+                Edit Profile
               </button>
               <button className="w-full text-left p-4 rounded-xl hover:bg-[#f4f5fb] transition-all font-[Poppins] text-gray-700 border border-gray-100 hover:border-[#fe7475] hover:scale-105 transform duration-200">
-                🎁 My Wishlist
+                My Wishlist
               </button>
               <button className="w-full text-left p-4 rounded-xl hover:bg-[#f4f5fb] transition-all font-[Poppins] text-gray-700 border border-gray-100 hover:border-[#ffbe3d] hover:scale-105 transform duration-200">
-                ⚙️ Settings
+                Settings
               </button>
             </div>
           </div>
@@ -87,7 +87,7 @@ const Homepage = () => {
             onClick={handleLogout}
             className="w-full text-left p-4 rounded-xl bg-[#f4f5fb] hover:bg-red-50 hover:text-red-600 transition-all font-[Poppins] text-gray-700 border border-gray-200 mt-auto hover:scale-105 transform duration-200"
           >
-            🚪 Logout
+            Logout
           </button>
         </div>
       </div>
