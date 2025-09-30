@@ -9,11 +9,9 @@ export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showHomepage, setShowHomepage] = useState(true); // Set to true to start with homepage
   const [isBdayModalOpen, setIsBdayModalOpen] = useState<boolean>(false);
-
   const handleLoginClick = () => {
     setIsModalOpen(true);
   };
-
   const handleModalComplete = (data: {
     birthday?: string;
     wishlist?: string;
@@ -22,16 +20,13 @@ export default function App() {
     setIsModalOpen(false);
     setShowHomepage(true);
   };
-
   // Simple toggle button to switch between views
   const toggleView = () => {
     setShowHomepage(!showHomepage);
   };
-
   const handleOpenModal = () => {
     setIsBdayModalOpen(true);
   };
-
   const handleCloseModal = () => {
     setIsBdayModalOpen(false);
   };
@@ -62,7 +57,6 @@ export default function App() {
       </div>
     );
   }
-
   return (
     <div>
       <LoginPage imageSrc={symphonyLogoImagef} onClick={handleLoginClick} />

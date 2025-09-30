@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 interface ButtonProps {
   content: string;
   type: "button" | "submit" | "reset";
-  disabled: boolean;
+  disabled?: boolean;
   handleClick: () => void;
 }
 
