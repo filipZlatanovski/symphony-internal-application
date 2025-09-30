@@ -3,6 +3,7 @@ import LoginPage from "./components/LoginPage/LoginPage";
 import LandingModal from "./components/LandingModal/LandingModal";
 import symphonyLogoImagef from "./assets/BirthdayPlanner.svg";
 import { useState } from "react";
+import BirthdayModal from "./components/BirthdayModal/BirthdayModal";
 
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,11 +20,27 @@ export default function App() {
     console.log("Modal completed with data:", data);
     setIsModalOpen(false);
   };
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const handleOpenModal = () => {
+    setIsOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  };
 
   return (
     <>
-      <LoginPage imageSrc={symphonyLogoImagef} onClick={handleLoginClick} />
-      <LandingModal open={isModalOpen} onComplete={handleModalComplete} />
+      <button onClick={handleOpenModal}>Open the modal</button>
+      <BirthdayModal
+        open={isOpen}
+        onClose={handleCloseModal}
+        handleOrganizeBirthday={() => {
+          console.log("default function");
+        }}
+      />
+      {/* <LoginPage imageSrc={symphonyLogoImagef} onClick={handleLoginClick} />
+      <LandingModal open={isModalOpen} onComplete={handleModalComplete} /> */}
     </>
   );
 }
