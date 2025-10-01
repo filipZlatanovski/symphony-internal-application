@@ -29,7 +29,14 @@ export default function TutorialPage({
         ))}
       </div>
       <div className="flex justify-center items-center mt-[5rem]">
-        <Button type="button" disabled={false} content={"Get Started →"} />
+        <Button
+          type="button"
+          disabled={false}
+          content={"Get Started →"}
+          handleClick={() => {
+            console.log("it should re-route to the homepage");
+          }}
+        />
       </div>
     </>
   );

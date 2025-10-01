@@ -10,7 +10,7 @@ const Homepage = () => {
 
   const stats = [
     { label: "Upcoming Birthdays", value: 3, sublabel: "Next 30 days" },
-    { label: "Active Celebrations", value: 2, sublabel: "Being organized" },
+    { label: "Active Celebrations", value: 2, sublabel: "You're contributing to" },
     { label: "Team Members", value: 24, sublabel: "In your circle" },
   ];
 

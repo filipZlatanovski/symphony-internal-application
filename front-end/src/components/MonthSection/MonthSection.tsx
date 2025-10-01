@@ -14,12 +14,11 @@ const MonthSection: React.FC<MonthSectionProps> = ({ month, birthdays, onCardCli
       <Stack spacing={2}>
         {birthdays.map((b) => (
           <BirthdayCard 
-            key={b.id} 
-            name={b.name} 
-            lastName={b.lastName} 
-            daysLeft={b.daysLeft} 
-            onClick={() => onCardClick(b.id)} 
-          />
+                key={b.id}
+                name={b.name}
+                lastName={b.lastName}
+                daysLeft={b.daysLeft}
+                onClick={() => onCardClick(b.id)} id={0}          />
         ))}
       </Stack>
     </Paper>
