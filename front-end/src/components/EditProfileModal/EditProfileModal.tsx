@@ -1,10 +1,9 @@
-import { Box, Modal } from "@mui/material";
-import editProfileModal from "./editProfileModal.styles";
 import TypographyText from "../TypographyText/TypographyText";
 import CloseButton from "../CloseButton/CloseButton";
 import InputField from "../InputField/InputField";
 import { useState, type ChangeEvent } from "react";
 import Button from "../Button/Button";
+import ModalContainer from "../ModalContainer/ModalContainer";
 
 interface EditProfileModalProps {
   isOpen: boolean;
@@ -31,40 +30,38 @@ export default function EditProfileModal({
 
   // this will also be wrapped in a form input later on
   return (
-    <Modal open={isOpen} onClose={onClose}>
-      <Box sx={editProfileModal}>
-        <CloseButton onClose={onClose} />
-        <TypographyText text="Edit Profile" variant="h3" />
-        <InputField
-          type="text"
-          label="Nickname (Optional)"
-          placeholder="Nickname"
-          htmlFor="aria-nickname-input"
-          htmlId="aria-nickname-input"
-          value={nicknameValue}
-          onValueChange={handleNicknameChange}
+    <ModalContainer open={isOpen} onClose={onClose}>
+      <CloseButton onClose={onClose} />
+      <TypographyText text="Edit Profile" variant="h3" />
+      <InputField
+        type="text"
+        label="Nickname (Optional)"
+        placeholder="Nickname"
+        htmlFor="aria-nickname-input"
+        htmlId="aria-nickname-input"
+        value={nicknameValue}
+        onValueChange={handleNicknameChange}
+      />
+      <InputField
+        type="number"
+        label="Update Bank Details"
+        placeholder="e.g 30000XYZ"
+        htmlFor="aria-update-bank-details"
+        htmlId="aria-update-bank-details"
+        value={bankDetails}
+        onValueChange={handleBankDetailsChange}
+      />
+      <div className="flex justify-center items-center mt-5">
+        <Button
+          type="submit"
+          content="Submit"
+          handleClick={() => {
+            console.log(
+              "this should submit the values in the db, clear the values and close the modal"
+            );
+          }}
         />
-        <InputField
-          type="number"
-          label="Update Bank Details"
-          placeholder="e.g 30000XYZ"
-          htmlFor="aria-update-bank-details"
-          htmlId="aria-update-bank-details"
-          value={bankDetails}
-          onValueChange={handleBankDetailsChange}
-        />
-        <div className="flex justify-center items-center mt-5">
-          <Button
-            type="submit"
-            content="Submit"
-            handleClick={() => {
-              console.log(
-                "this should submit the values in the db, clear the values and close the modal"
-              );
-            }}
-          />
-        </div>
-      </Box>
-    </Modal>
+      </div>
+    </ModalContainer>
   );
 }
