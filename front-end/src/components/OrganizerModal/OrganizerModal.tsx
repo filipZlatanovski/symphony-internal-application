@@ -18,22 +18,10 @@ export default function OrganizerModal({
   onClose,
   onSubmit,
 }: OrganizerModalProps) {
-  const [contributionAmount, setContributionAmount] = useState<number>();
   const [bankDetails, setBankDetails] = useState<number>();
 
   const isFormValid =
-    bankDetails === 0 ||
-    contributionAmount === 0 ||
-    typeof bankDetails !== "number" ||
-    typeof contributionAmount !== "number" ||
-    !bankDetails ||
-    !contributionAmount;
-
-  const handleContributionAmountChange = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setContributionAmount(parseInt(event.target.value));
-  };
+    bankDetails === 0 || typeof bankDetails !== "number" || !bankDetails;
 
   const handleBankDetailsChange = (event: ChangeEvent<HTMLInputElement>) => {
     setBankDetails(parseInt(event.target.value));
@@ -45,15 +33,6 @@ export default function OrganizerModal({
         <CloseButton onClose={onClose} />
         {/* this should be wrapped in a form component later on */}
         <TypographyText text="One Step Closer!" variant="h3" />
-        <InputField
-          type="number"
-          placeholder="Enter a contribution amount - e.g. 450"
-          htmlFor="aria-amount-label"
-          htmlId="aria-amount-label"
-          label="Contribution Amount"
-          value={contributionAmount!}
-          onValueChange={handleContributionAmountChange}
-        />
         <InputField
           type="number"
           placeholder="Enter your bank details - e.g 30000XXX"
