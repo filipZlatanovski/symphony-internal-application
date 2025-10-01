@@ -1,5 +1,10 @@
 import { Paper, Typography, Box } from "@mui/material";
 import { motion } from "framer-motion";
+import {
+  birthdayCardPaperStyles,
+  birthdayCardBoxStyles,
+  birthdayCardAvatarStyles,
+} from "./birthdayCard.styles";
 
 interface BirthdayCardProps {
   id: number;
@@ -9,49 +14,33 @@ interface BirthdayCardProps {
   onClick: (id: number) => void;
 }
 
-const BirthdayCard = ({ id, name, lastName, daysLeft, onClick }: BirthdayCardProps) => {
+const BirthdayCard = ({
+  id,
+  name,
+  lastName,
+  daysLeft,
+  onClick,
+}: BirthdayCardProps) => {
   return (
     <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
-      <Paper
-        sx={{
-          p: 3,
-          cursor: "pointer",
-          borderRadius: 3,
-          border: "1px solid",
-          borderColor: "grey.200",
-          "&:hover": {
-            borderColor: "#6c69ff",
-            boxShadow: 6,
-          },
-        }}
-        onClick={() => onClick(id)}
-      >
-        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "left" }}>
+      <Paper sx={birthdayCardPaperStyles} onClick={() => onClick(id)}>
+        <Box sx={birthdayCardBoxStyles}>
           {/* Avatar initials */}
           <Box
             component={motion.div}
             whileHover={{ scale: 1.1 }}
-            sx={{
-              width: 64,
-              height: 64,
-              borderRadius: "50%",
-              bgcolor: "#fe7475",
-              color: "white",
-              fontWeight: "bold",
-              fontSize: "1.25rem",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              mr: 2,
-              "&:hover": { bgcolor: "#6c69ff" },
-            }}
+            sx={birthdayCardAvatarStyles}
           >
-            {name[0]}{lastName[0]}
+            {name[0]}
+            {lastName[0]}
           </Box>
 
           {/* Info */}
           <Box>
-            <Typography variant="h6" sx={{ fontWeight: "bold", "&:hover": { color: "#6c69ff" } }}>
+            <Typography
+              variant="h6"
+              sx={{ fontWeight: "bold", "&:hover": { color: "#6c69ff" } }}
+            >
               {name} {lastName}
             </Typography>
             <Typography variant="body2" color="text.secondary">
