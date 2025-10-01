@@ -22,18 +22,17 @@ const Homepage = () => {
   return (
     <Box sx={{ display: "flex", minHeight: "100vh", backgroundColor: "#f4f5fb" }}>
       <Sidebar 
-        open={sidebarOpen} 
-        onClose={() => setSidebarOpen(false)} 
-        onLogout={() => console.log("Logout")} 
-        onEditProfile={() => console.log("Edit Profile")} 
-      />
+        onLogout={() => console.log("Logout")}
+        onEditProfile={() => console.log("Edit Profile")} onWishlist={function (): void {
+          throw new Error("Function not implemented.");
+        } }      />
 
       <Box 
         component="main" 
         sx={{ 
           flexGrow: 1, 
           p: 4, 
-          ml: sidebarOpen ? "30px" : 0,
+          ml: sidebarOpen ? "100px" : 0,
           transition: "margin-left 0.3s ease-in-out",
           width: sidebarOpen ? "calc(100% - 10px)" : "100%"
         }}
@@ -87,7 +86,7 @@ const Homepage = () => {
           </Box>
 
           {/* Simple Box for month sections */}
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             {birthdaysByMonth.map((m, i) => (
               <MonthSection 
                 key={i}
