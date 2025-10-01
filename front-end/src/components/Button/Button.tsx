@@ -22,7 +22,10 @@ export default function Button({
         y: -5,
         transition: { duration: 0.02 },
       }}
-      className="bg-[rgb(108,105,255)] px-5 py-3 rounded-full font-[Poppins] text-white cursor-pointer hover:bg-[rgb(88,85,230)] transition-all"
+      className={`bg-[#6c69ff] ${
+        disabled &&
+        "bg-gray-400 hover:bg-gray-500 transition-all hover:cursor-not-allowed"
+      } px-5 py-3 rounded-full font-[Poppins] text-white cursor-pointer hover:bg-[rgb(88,85,230)] transition-all`}
       type={type}
       disabled={disabled}
       onClick={handleClick}
