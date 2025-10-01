@@ -3,12 +3,19 @@ import { labelStyles, inputStyles } from "./inputField.styles";
 import type { ChangeEvent } from "react";
 
 interface InputFieldProps {
-  type?: "number" | "string" | "text" | "email" | "password" | "date";
+  type?:
+    | "number"
+    | "string"
+    | "text"
+    | "email"
+    | "password"
+    | "date"
+    | undefined;
   label: string;
   placeholder: string;
   htmlFor: string;
   htmlId: string;
-  value: string | number;
+  value: string | number | undefined;
   onValueChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
