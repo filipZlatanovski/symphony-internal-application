@@ -1,138 +1,87 @@
-import {
-  Drawer,
-  Box,
-  Avatar,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  IconButton,
-  Typography,
-} from "@mui/material";
-import { Close, Edit, CardGiftcard, Settings, Logout } from "@mui/icons-material";
+import { Box, Avatar, IconButton, Tooltip } from "@mui/material";
+import { Edit, CardGiftcard, Logout } from "@mui/icons-material";
 
 interface SidebarProps {
-  open: boolean;
-  onClose: () => void;
-  onLogout: () => void;
   onEditProfile: () => void;
+  onWishlist: () => void;
+  onLogout: () => void;
 }
 
-const menuItems = [
-  { icon: <Edit />, text: "Edit Profile", color: "#6c69ff" },
-  { icon: <CardGiftcard />, text: "My Wishlist", color: "#fe7475" },
-  { icon: <Settings />, text: "Settings", color: "#ffbe3d" },
-];
-
-const Sidebar: React.FC<SidebarProps> = ({ open, onClose, onLogout, onEditProfile }) => {
+const Sidebar: React.FC<SidebarProps> = ({ onEditProfile, onWishlist, onLogout }) => {
   return (
-    <Drawer
-      variant="persistent"
-      anchor="left"
-      open={open}
+    <Box
       sx={{
-        width: 320,
-        "& .MuiDrawer-paper": {
-          width: 320,
-          boxSizing: "border-box",
-          borderRadius: "0 16px 16px 0",
-          padding: 2,
-          backgroundColor: "#fff",
-          display: "flex",
-          flexDirection: "column",
-        },
+        position: "fixed",
+        left: 0,
+        top: 0,
+        bottom: 0,
+        width: { xs: 72, sm: 96 },
+        bgcolor: "#fff",
+        borderRight: "1px solid #eee",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        py: 3,
+        px: 1,
+        zIndex: 1000,
       }}
     >
-      {/* Header */}
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          borderBottom: "1px solid #eee",
-          pb: 2,
-          mb: 2,
-        }}
-      >
-        <Typography variant="h6" sx={{ fontWeight: "bold", fontFamily: "Poppins, sans-serif" }}>
-          Profile
-        </Typography>
-        <IconButton onClick={onClose}>
-          <Close />
+      
+
+      {/* Profile Icon */}
+      <Tooltip title="Edit Profile" placement="right">
+        <IconButton
+          onClick={onEditProfile}
+          sx={{
+            mb: 3,
+            bgcolor: "#6c69ff",
+            color: "#fff",
+            width: { xs: 48, sm: 64 },
+            height: { xs: 48, sm: 64 },
+            "&:hover": { bgcolor: "#6c69ff" },
+          }}
+        >
+          <Edit />
         </IconButton>
-      </Box>
+      </Tooltip>
 
-      {/* User Info */}
-      <Box sx={{ display: "flex", alignItems: "center", mb: 3, px: 1 }}>
-        <Avatar sx={{ bgcolor: "#6c69ff", width: 64, height: 64, mr: 2 }}>AJ</Avatar>
-        <Box>
-          <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
-            Alex Johnson
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            alex.j@company.com
-          </Typography>
-        </Box>
-      </Box>
+      {/* Wishlist Icon */}
+      <Tooltip title="My Wishlist" placement="right">
+        <IconButton
+          onClick={onWishlist}
+          sx={{
+            mb: 3,
+            bgcolor: "#ffbe3d",
+            color: "#000",
+            width: { xs: 48, sm: 64 },
+            height: { xs: 48, sm: 64 },
+            "&:hover": { bgcolor: "#f0b02e" },
+          }}
+        >
+          <CardGiftcard />
+        </IconButton>
+      </Tooltip>
 
-      {/* Menu Items */}
-      <List sx={{ flexGrow: 1 }}>
-        {menuItems.map((item) => (
-          <ListItem key={item.text} disablePadding>
-            <ListItemButton
-              onClick={item.text === "Edit Profile" ? onEditProfile : undefined}
-              sx={{
-                borderRadius: "12px",
-                mb: 1,
-                "&:hover": {
-                  backgroundColor: `${item.color}15`, // subtle tint
-                  transform: "translateX(4px)",
-                  transition: "all 0.2s ease-in-out",
-                },
-              }}
-            >
-              <ListItemIcon sx={{ color: item.color }}>{item.icon}</ListItemIcon>
-              <ListItemText
-                primary={item.text}
-                primaryTypographyProps={{
-                  fontFamily: "Poppins, sans-serif",
-                  fontWeight: 500,
-                }}
-              />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      {/* Spacer */}
+      <Box sx={{ flexGrow: 1 }} />
 
-      {/* Logout Button */}
-      <Box sx={{ mt: "auto", px: 1 }}>
-        <ListItem disablePadding>
-          <ListItemButton
-            onClick={onLogout}
-            sx={{
-              borderRadius: "12px",
-              "&:hover": {
-                backgroundColor: "#fce4e4",
-                transform: "translateX(4px)",
-                transition: "all 0.2s ease-in-out",
-              },
-            }}
-          >
-            <ListItemIcon sx={{ color: "#ff4d4d" }}>
-              <Logout />
-            </ListItemIcon>
-            <ListItemText
-              primary="Logout"
-              primaryTypographyProps={{
-                fontFamily: "Poppins, sans-serif",
-                fontWeight: 500,
-              }}
-            />
-          </ListItemButton>
-        </ListItem>
-      </Box>
-    </Drawer>
+      {/* Logout Icon */}
+      <Tooltip title="Logout" placement="right">
+        <IconButton
+          onClick={onLogout}
+          sx={{
+            mb: 3,
+            bgcolor: "#f4f5fb",
+            color: "#ff4d4d",
+            width: { xs: 48, sm: 64 },
+            height: { xs: 48, sm: 64 },
+            "&:hover": { bgcolor: "#fce4e4" },
+          }}
+        >
+          <Logout />
+        </IconButton>
+      </Tooltip>
+    </Box>
   );
 };
 
