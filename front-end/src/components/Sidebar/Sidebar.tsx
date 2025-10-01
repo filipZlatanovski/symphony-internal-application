@@ -1,20 +1,31 @@
-import { Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Avatar, Box } from '@mui/material';
-import { Edit, CardGiftcard, Settings, Logout } from '@mui/icons-material';
+import {
+  Drawer,
+  Box,
+  Avatar,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  IconButton,
+  Typography,
+} from "@mui/material";
+import { Close, Edit, CardGiftcard, Settings, Logout } from "@mui/icons-material";
 
 interface SidebarProps {
   open: boolean;
   onClose: () => void;
-  onProfileEdit: () => void;
   onLogout: () => void;
+  onEditProfile: () => void;
 }
 
-export default function Sidebar({ open, onProfileEdit, onLogout }: SidebarProps) {
-  const menuItems = [
-    { icon: <Edit />, text: 'Edit Profile', onClick: onProfileEdit, color: '#6c69ff' },
-    { icon: <CardGiftcard />, text: 'My Wishlist', onClick: () => {}, color: '#fe7475' },
-    { icon: <Settings />, text: 'Settings', onClick: () => {}, color: '#ffbe3d' },
-  ];
+const menuItems = [
+  { icon: <Edit />, text: "Edit Profile", color: "#6c69ff" },
+  { icon: <CardGiftcard />, text: "My Wishlist", color: "#fe7475" },
+  { icon: <Settings />, text: "Settings", color: "#ffbe3d" },
+];
 
+const Sidebar: React.FC<SidebarProps> = ({ open, onClose, onLogout, onEditProfile }) => {
   return (
     <Drawer
       variant="persistent"
@@ -22,100 +33,100 @@ export default function Sidebar({ open, onProfileEdit, onLogout }: SidebarProps)
       open={open}
       sx={{
         width: 320,
-        flexShrink: 0,
-        '& .MuiDrawer-paper': {
+        "& .MuiDrawer-paper": {
           width: 320,
-          boxSizing: 'border-box',
-          backgroundColor: 'white',
-          border: 'none',
-          boxShadow: 3,
+          boxSizing: "border-box",
+          borderRadius: "0 16px 16px 0",
+          padding: 2,
+          backgroundColor: "#fff",
+          display: "flex",
+          flexDirection: "column",
         },
       }}
     >
-      {/* Profile Section */}
-      <Box className="p-6 border-b border-gray-100">
-        <h2 className="text-xl font-semibold text-gray-900 font-[Poppins]">Profile</h2>
+      {/* Header */}
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          borderBottom: "1px solid #eee",
+          pb: 2,
+          mb: 2,
+        }}
+      >
+        <Typography variant="h6" sx={{ fontWeight: "bold", fontFamily: "Poppins, sans-serif" }}>
+          Profile
+        </Typography>
+        <IconButton onClick={onClose}>
+          <Close />
+        </IconButton>
       </Box>
-      
-      <Box className="p-6 flex flex-col h-full">
-        {/* User Info */}
-        <Box className="flex items-center space-x-4 mb-8">
-          <Avatar
-            sx={{
-              width: 64,
-              height: 64,
-              bgcolor: '#6c69ff',
-              fontSize: '1.25rem',
-              fontWeight: 'bold',
-            }}
-          >
-            AJ
-          </Avatar>
-          <Box>
-            <h3 className="font-semibold text-gray-900 font-[Poppins]">Alex Johnson</h3>
-            <p className="text-gray-600 text-sm font-[Poppins]">alex.j@company.com</p>
-          </Box>
+
+      {/* User Info */}
+      <Box sx={{ display: "flex", alignItems: "center", mb: 3, px: 1 }}>
+        <Avatar sx={{ bgcolor: "#6c69ff", width: 64, height: 64, mr: 2 }}>AJ</Avatar>
+        <Box>
+          <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
+            Alex Johnson
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            alex.j@company.com
+          </Typography>
         </Box>
+      </Box>
 
-        {/* Menu Items */}
-        <List className="flex-1">
-          {menuItems.map((item) => (
-            <ListItem key={item.text} disablePadding sx={{ mb: 1 }}>
-              <ListItemButton
-                onClick={item.onClick}
-                sx={{
-                  borderRadius: 3,
-                  padding: '12px 16px',
-                  '&:hover': {
-                    backgroundColor: '#f4f5fb',
-                    border: `1px solid ${item.color}`,
-                    transform: 'scale(1.02)',
-                  },
-                  transition: 'all 0.2s ease-in-out',
-                  border: '1px solid #f1f1f1',
+      {/* Menu Items */}
+      <List sx={{ flexGrow: 1 }}>
+        {menuItems.map((item) => (
+          <ListItem key={item.text} disablePadding>
+            <ListItemButton
+              onClick={item.text === "Edit Profile" ? onEditProfile : undefined}
+              sx={{
+                borderRadius: "12px",
+                mb: 1,
+                "&:hover": {
+                  backgroundColor: `${item.color}15`, // subtle tint
+                  transform: "translateX(4px)",
+                  transition: "all 0.2s ease-in-out",
+                },
+              }}
+            >
+              <ListItemIcon sx={{ color: item.color }}>{item.icon}</ListItemIcon>
+              <ListItemText
+                primary={item.text}
+                primaryTypographyProps={{
+                  fontFamily: "Poppins, sans-serif",
+                  fontWeight: 500,
                 }}
-              >
-                <ListItemIcon sx={{ color: item.color, minWidth: 40 }}>
-                  {item.icon}
-                </ListItemIcon>
-                <ListItemText 
-                  primary={item.text}
-                  primaryTypographyProps={{
-                    fontFamily: 'Poppins',
-                    color: 'text.primary',
-                  }}
-                />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+              />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
 
-        {/* Logout Button */}
-        <ListItem disablePadding sx={{ mt: 'auto' }}>
+      {/* Logout Button */}
+      <Box sx={{ mt: "auto", px: 1 }}>
+        <ListItem disablePadding>
           <ListItemButton
             onClick={onLogout}
             sx={{
-              borderRadius: 3,
-              padding: '12px 16px',
-              backgroundColor: '#f4f5fb',
-              '&:hover': {
-                backgroundColor: '#fee',
-                color: 'error.main',
-                border: '1px solid',
-                borderColor: 'error.light',
-                transform: 'scale(1.02)',
+              borderRadius: "12px",
+              "&:hover": {
+                backgroundColor: "#fce4e4",
+                transform: "translateX(4px)",
+                transition: "all 0.2s ease-in-out",
               },
-              transition: 'all 0.2s ease-in-out',
-              border: '1px solid #f1f1f1',
             }}
           >
-            <ListItemIcon sx={{ minWidth: 40 }}>
+            <ListItemIcon sx={{ color: "#ff4d4d" }}>
               <Logout />
             </ListItemIcon>
-            <ListItemText 
+            <ListItemText
               primary="Logout"
               primaryTypographyProps={{
-                fontFamily: 'Poppins',
+                fontFamily: "Poppins, sans-serif",
+                fontWeight: 500,
               }}
             />
           </ListItemButton>
@@ -123,4 +134,6 @@ export default function Sidebar({ open, onProfileEdit, onLogout }: SidebarProps)
       </Box>
     </Drawer>
   );
-}
+};
+
+export default Sidebar;
