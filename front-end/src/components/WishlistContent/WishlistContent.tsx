@@ -54,6 +54,7 @@ export default function WishlistContent() {
       <ul className="list-disc mx-5">
         {wishlists.map((item) => (
           <motion.li
+            key={item.id}
             initial={{
               y: 0,
             }}
@@ -61,9 +62,9 @@ export default function WishlistContent() {
               y: -1.2,
             }}
           >
-            <a href={item.link}>
+            <p className="cursor-default">
               {item.title} - {item.price}
-            </a>
+            </p>
           </motion.li>
         ))}
       </ul>

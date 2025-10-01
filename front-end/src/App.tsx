@@ -4,11 +4,16 @@ import Homepage from "./components/Homepage/Homepage";
 import symphonyLogoImagef from "./assets/BirthdayPlanner.svg";
 import { useState } from "react";
 import BirthdayModal from "./components/BirthdayModal/BirthdayModal";
+import OrganizerModal from "./components/OrganizerModal/OrganizerModal";
+import { Toaster, toast } from "react-hot-toast";
 
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showHomepage, setShowHomepage] = useState(true); // Set to true to start with homepage
   const [isBdayModalOpen, setIsBdayModalOpen] = useState<boolean>(false);
+  const [isOrganizerModalOpen, setIsOrganizerModalOpen] =
+    useState<boolean>(false);
+
   const handleLoginClick = () => {
     setIsModalOpen(true);
   };
@@ -31,9 +36,26 @@ export default function App() {
     setIsBdayModalOpen(false);
   };
 
+  // this function will handle the submition of data from the organizer modal
+  // it will also close the modals upon submition
+  const handleOrganizerSubmit = () => {
+    setIsOrganizerModalOpen(false);
+    setIsBdayModalOpen(false);
+    toast.success(
+      "Congrats! You are now the organizer of <name's> birthday party!"
+    );
+  };
+
   if (showHomepage) {
     return (
       <div>
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+          toastOptions={{
+            className: "text-center font-light font-[Poppins]",
+          }}
+        />
         <Homepage />
         <button
           onClick={toggleView}
@@ -50,13 +72,20 @@ export default function App() {
         <BirthdayModal
           open={isBdayModalOpen}
           onClose={handleCloseModal}
-          handleOrganizeBirthday={() => {
+          onOpenOrganizerModal={() => {
             console.log("random text");
+            setIsOrganizerModalOpen(true);
           }}
+        />
+        <OrganizerModal
+          isOpen={isOrganizerModalOpen}
+          onClose={() => setIsOrganizerModalOpen(false)}
+          onSubmit={handleOrganizerSubmit}
         />
       </div>
     );
   }
+
   return (
     <div>
       <LoginPage imageSrc={symphonyLogoImagef} onClick={handleLoginClick} />
