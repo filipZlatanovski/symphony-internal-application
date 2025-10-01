@@ -1,74 +1,85 @@
-import { Paper } from '@mui/material';
-import { motion } from 'motion/react';
+import { Paper, Typography, Box } from "@mui/material";
+import { motion } from "framer-motion";
 
 interface BirthdayCardProps {
-  birthday: {
-    id: number;
-    name: string;
-    lastName: string;
-    daysLeft: number;
-  };
-  onClick: (birthday: any) => void;
+  id: number;
+  name: string;
+  lastName: string;
+  daysLeft: number;
+  onClick: (id: number) => void;
 }
 
-export default function BirthdayCard({ birthday, onClick }: BirthdayCardProps) {
+const BirthdayCard = ({ id, name, lastName, daysLeft, onClick }: BirthdayCardProps) => {
   return (
-    <motion.div
-      whileHover={{ scale: 1.02 }}
-      transition={{ duration: 0.3 }}
-    >
-      <Paper 
-        className="p-6 rounded-2xl border border-gray-200 hover:border-[#6c69ff] cursor-pointer group transition-all duration-300"
-        sx={{ 
-          backgroundColor: 'white',
-          '&:hover': {
+    <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
+      <Paper
+        sx={{
+          p: 3,
+          cursor: "pointer",
+          borderRadius: 3,
+          border: "1px solid",
+          borderColor: "grey.200",
+          "&:hover": {
+            borderColor: "#6c69ff",
             boxShadow: 6,
-            borderColor: '#6c69ff'
-          }
+          },
         }}
-        onClick={() => onClick(birthday)}
+        onClick={() => onClick(id)}
       >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.2 }}
-              className="w-16 h-16 bg-[#fe7475] rounded-full flex items-center justify-center text-white font-semibold text-xl group-hover:bg-[#6c69ff] transition-all duration-300"
-            >
-              {birthday.name[0]}{birthday.lastName[0]}
-            </motion.div>
-            <div>
-              <h4 className="font-semibold text-gray-900 font-[Poppins] text-xl group-hover:text-[#6c69ff] transition-colors duration-300">
-                {birthday.name} {birthday.lastName}
-              </h4>
-              <p className="text-gray-600 font-[Poppins]">
-                Birthday celebration
-              </p>
-            </div>
-          </div>
-          
-          <div className="text-right">
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.2 }}
-              className="text-2xl font-bold text-[#6c69ff] font-[Poppins] mb-1"
-            >
-              {birthday.daysLeft} days
-            </motion.div>
-            <div className="text-sm text-gray-600 font-[Poppins]">
+        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          {/* Avatar initials */}
+          <Box
+            component={motion.div}
+            whileHover={{ scale: 1.1 }}
+            sx={{
+              width: 64,
+              height: 64,
+              borderRadius: "50%",
+              bgcolor: "#fe7475",
+              color: "white",
+              fontWeight: "bold",
+              fontSize: "1.25rem",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              mr: 2,
+              "&:hover": { bgcolor: "#6c69ff" },
+            }}
+          >
+            {name[0]}{lastName[0]}
+          </Box>
+
+          {/* Info */}
+          <Box>
+            <Typography variant="h6" sx={{ fontWeight: "bold", "&:hover": { color: "#6c69ff" } }}>
+              {name} {lastName}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Birthday celebration
+            </Typography>
+          </Box>
+
+          {/* Days left */}
+          <Box textAlign="right">
+            <Typography variant="h6" color="#6c69ff" fontWeight="bold">
+              {daysLeft} days
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
               until celebration
-            </div>
+            </Typography>
             <motion.div
               initial={{ opacity: 0 }}
               whileHover={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
-              className="mt-2 text-[#6c69ff] text-sm font-[Poppins] font-medium"
+              style={{ color: "#6c69ff", fontSize: "0.875rem", marginTop: 4 }}
             >
               Click to contribute →
             </motion.div>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </Paper>
     </motion.div>
   );
-}
+};
+
+export default BirthdayCard;

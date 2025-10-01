@@ -1,37 +1,39 @@
-import { Paper } from '@mui/material';
-import { motion } from 'motion/react';
+import { Paper, Typography, Box } from "@mui/material";
+import { motion } from "framer-motion";
 
 interface StatsCardProps {
-  value: string;
   label: string;
+  value: number;
   sublabel: string;
 }
 
-export default function StatsCard({ value, label, sublabel }: StatsCardProps) {
+const StatsCard = ({ label, value, sublabel }: StatsCardProps) => {
   return (
-    <motion.div
-      whileHover={{ scale: 1.05 }}
-      transition={{ duration: 0.2 }}
-    >
-      <Paper 
-        className="p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300"
-        sx={{ 
-          backgroundColor: 'white',
-          '&:hover': {
-            boxShadow: 4
-          }
+    <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
+      <Paper
+        sx={{
+          p: 3,
+          backgroundColor: "white",
+          borderRadius: 3,
+          boxShadow: 2,
+          "&:hover": { boxShadow: 6 },
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
         }}
       >
-        <div className="text-3xl font-bold text-gray-900 font-[Poppins] mb-2">
+        <Typography variant="h4" sx={{ fontWeight: "bold", mb: 1 }}>
           {value}
-        </div>
-        <div className="text-lg font-semibold text-gray-900 font-[Poppins] mb-1">
+        </Typography>
+        <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
           {label}
-        </div>
-        <div className="text-sm text-gray-600 font-[Poppins]">
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
           {sublabel}
-        </div>
+        </Typography>
       </Paper>
     </motion.div>
   );
-}
+};
+
+export default StatsCard;

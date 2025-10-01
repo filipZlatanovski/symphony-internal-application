@@ -1,46 +1,29 @@
-import { Paper, Typography } from '@mui/material';
-import BirthdayCard from '../BirthdayCard/BirthdayCard';
-
-interface Birthday {
-  id: number;
-  name: string;
-  lastName: string;
-  daysLeft: number;
-}
+import { Paper, Typography, Stack } from "@mui/material";
+import BirthdayCard from '../BirthdayCard/BirthdayCard.tsx'
 
 interface MonthSectionProps {
   month: string;
-  birthdays: Birthday[];
-  onBirthdayClick: (birthday: Birthday) => void;
+  birthdays: { id: number; name: string; lastName: string; daysLeft: number }[];
+  onCardClick: (id: number) => void;
 }
 
-export default function MonthSection({ month, birthdays, onBirthdayClick }: MonthSectionProps) {
+const MonthSection: React.FC<MonthSectionProps> = ({ month, birthdays, onCardClick }) => {
   return (
-    <Paper 
-      className="rounded-2xl shadow-sm p-6"
-      sx={{ backgroundColor: 'white' }}
-    >
-      <Typography 
-        variant="h5" 
-        className="mb-6 border-b border-gray-100 pb-3"
-        sx={{ 
-          fontFamily: 'Poppins',
-          fontWeight: 600,
-          color: 'text.primary'
-        }}
-      >
-        {month}
-      </Typography>
-      
-      <div className="space-y-4">
-        {birthdays.map((birthday) => (
-          <BirthdayCard
-            key={birthday.id}
-            birthday={birthday}
-            onClick={onBirthdayClick}
+    <Paper sx={{ p: 3, borderRadius: 3 }}>
+      <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>{month}</Typography>
+      <Stack spacing={2}>
+        {birthdays.map((b) => (
+          <BirthdayCard 
+            key={b.id} 
+            name={b.name} 
+            lastName={b.lastName} 
+            daysLeft={b.daysLeft} 
+            onClick={() => onCardClick(b.id)} 
           />
         ))}
-      </div>
+      </Stack>
     </Paper>
   );
-}
+};
+
+export default MonthSection;
