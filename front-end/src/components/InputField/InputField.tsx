@@ -17,6 +17,8 @@ export default function InputField({
   placeholder,
   htmlFor,
   htmlId,
+  value,
+  onChange,
 }: InputFieldProps) {
   return (
     <>
@@ -30,6 +32,8 @@ export default function InputField({
         sx={inputStyles}
         type={type}
         id={htmlId}
+        value={value}
+        onChange={onChange}
       />
     </>
   );
