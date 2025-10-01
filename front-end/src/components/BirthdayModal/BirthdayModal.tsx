@@ -8,10 +8,14 @@ import CloseButton from "../CloseButton/CloseButton";
 interface BirthdayModalProps {
   open: boolean;
   onClose: () => void;
-  handleOrganizeBirthday: () => void;
+  onOpenOrganizerModal: () => void;
 }
 
-export default function BirthdayModal({ open, onClose }: BirthdayModalProps) {
+export default function BirthdayModal({
+  open,
+  onClose,
+  onOpenOrganizerModal,
+}: BirthdayModalProps) {
   return (
     <Modal open={open} onClose={onClose}>
       <Box sx={birthdayModalStyles}>
@@ -25,9 +29,7 @@ export default function BirthdayModal({ open, onClose }: BirthdayModalProps) {
             handleContributeBirthday={() => {
               console.log("random");
             }}
-            handleOrganizeBirthday={() => {
-              console.log("random 2");
-            }}
+            handleOrganizeBirthday={onOpenOrganizerModal}
           />
         </div>
       </Box>

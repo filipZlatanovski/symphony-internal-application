@@ -24,14 +24,14 @@ export default function OrganizerModal({
         <TypographyText text="One Step Closer!" variant="h3" />
         <InputField
           type="number"
-          placeholder="Enter a desired amount"
+          placeholder="Enter a contribution amount - e.g. 450"
           htmlFor="aria-amount-label"
           htmlId="aria-amount-label"
-          label="Amount"
+          label="Contribution Amount"
         />
         <InputField
           type="number"
-          placeholder="Enter bank details"
+          placeholder="Enter your bank details - e.g 30000XXX"
           htmlFor="aria-bankDetails-label"
           htmlId="aria-bankDetails-label"
           label="Bank Details"
