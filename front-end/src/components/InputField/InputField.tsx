@@ -2,11 +2,13 @@ import { FilledInput, InputLabel } from "@mui/material";
 import { labelStyles, inputStyles } from "./inputField.styles";
 
 interface InputFieldProps {
-  type: "number" | "string";
+  type?: "number" | "string" | "text" | "email" | "password" | "date";
   label: string;
   placeholder: string;
   htmlFor: string;
   htmlId: string;
+  value?: string;
+  onChange: (e: any) => void;
 }
 
 export default function InputField({
@@ -15,6 +17,8 @@ export default function InputField({
   placeholder,
   htmlFor,
   htmlId,
+  value,
+  onChange,
 }: InputFieldProps) {
   return (
     <>
@@ -28,6 +32,8 @@ export default function InputField({
         sx={inputStyles}
         type={type}
         id={htmlId}
+        value={value}
+        onChange={onChange}
       />
     </>
   );
