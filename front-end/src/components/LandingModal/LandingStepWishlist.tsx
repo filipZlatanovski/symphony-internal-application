@@ -7,7 +7,12 @@ interface LandingStepWishlistProps {
   onComplete: () => void;
 }
 
-export default function LandingStepWishlist({ wishlist, onChange, onSkip, onComplete }: LandingStepWishlistProps) {
+export default function LandingStepWishlist({
+  wishlist,
+  onChange,
+  onSkip,
+  onComplete,
+}: LandingStepWishlistProps) {
   return (
     <div className="text-center">
       <h2 className="text-3xl font-semibold text-gray-900 mb-3 font-[Poppins]">
@@ -18,7 +23,10 @@ export default function LandingStepWishlist({ wishlist, onChange, onSkip, onComp
       </p>
 
       <div className="text-left mb-6">
-        <label htmlFor="wishlist" className="block text-sm font-medium text-gray-700 mb-2 font-[Poppins]">
+        <label
+          htmlFor="wishlist"
+          className="block text-sm font-medium text-gray-700 mb-2 font-[Poppins]"
+        >
           Gift Ideas <span className="text-gray-400">(Optional)</span>
         </label>
         <textarea
@@ -30,9 +38,15 @@ export default function LandingStepWishlist({ wishlist, onChange, onSkip, onComp
         />
       </div>
 
-      <div className="flex gap-3">
-        <Button type="button" content="Skip" handleClick={onSkip} />
-        <Button type="button" content="Complete Setup" handleClick={onComplete} />
+      <div className="flex gap-3 justify-center mt-4">
+        <Button
+                  content="Skip"
+                  handleClick={onSkip}
+                  variant="skip" type={"button"}        />
+        <Button
+                  content="Complete Setup"
+                  handleClick={onComplete}
+                  variant="accent" type={"button"}        />
       </div>
     </div>
   );

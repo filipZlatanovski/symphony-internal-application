@@ -8,7 +8,12 @@ interface LandingStepBirthdayProps {
   onNext: () => void;
 }
 
-export default function LandingStepBirthday({ birthday, onChange, onSkip, onNext }: LandingStepBirthdayProps) {
+export default function LandingStepBirthday({
+  birthday,
+  onChange,
+  onSkip,
+  onNext,
+}: LandingStepBirthdayProps) {
   return (
     <div className="text-center">
       <h2 className="text-3xl font-semibold text-gray-900 mb-3 font-[Poppins]">
@@ -30,9 +35,17 @@ export default function LandingStepBirthday({ birthday, onChange, onSkip, onNext
         />
       </div>
 
-      <div className="flex gap-3">
-        <Button type="button" content="Skip" handleClick={onSkip} />
-        <Button type="button" content="Next" handleClick={onNext} disabled={!birthday} />
+      <div className="flex gap-3 justify-center mt-4">
+        <Button
+                  content="Skip"
+                  handleClick={onSkip}
+                  variant="skip" type={"button"}        />
+        <Button
+                  content="Next"
+                  handleClick={onNext}
+                  variant="primary"
+                  disabled={!birthday} // optional: remove if Next should always work
+                  type={"button"}        />
       </div>
     </div>
   );

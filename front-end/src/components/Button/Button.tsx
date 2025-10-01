@@ -1,10 +1,12 @@
 import { motion } from "motion/react";
+import buttonStyles from "./Button.styles";
 
 interface ButtonProps {
   content: string;
   type: "button" | "submit" | "reset";
   disabled?: boolean;
   handleClick: () => void;
+  variant?: "primary" | "secondary" | "accent" | "skip";
 }
 
 export default function Button({
@@ -12,6 +14,7 @@ export default function Button({
   content,
   disabled,
   handleClick,
+  variant = "primary",
 }: ButtonProps) {
   return (
     <motion.button
@@ -22,8 +25,7 @@ export default function Button({
         y: -5,
         transition: { duration: 0.02 },
       }}
-      className="bg-[rgb(108,105,255)] px-5 py-3 rounded-full font-[Poppins] text-white cursor-pointer hover:bg-[rgb(88,85,230)] transition-all"
-      type={type}
+      className={`${buttonStyles[variant]} px-6 py-3 rounded-xl font-[Poppins] text-base font-medium transition-all`}
       disabled={disabled}
       onClick={handleClick}
     >
