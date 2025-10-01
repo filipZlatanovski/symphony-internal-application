@@ -6,7 +6,7 @@ interface ButtonProps {
   type: "button" | "submit" | "reset";
   disabled?: boolean;
   handleClick: () => void;
-  variant?: "primary" | "secondary" | "accent" | "skip";
+  variant?: "primary" | "secondary" | "accent" | "skip" | "disabled";
 }
 
 export default function Button({
@@ -18,6 +18,7 @@ export default function Button({
 }: ButtonProps) {
   return (
     <motion.button
+      type={type}
       initial={{
         y: 0,
       }}

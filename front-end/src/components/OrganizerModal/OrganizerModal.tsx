@@ -44,6 +44,7 @@ export default function OrganizerModal({
         />
         <div className="flex justify-center items-center mt-5">
           <Button
+            variant={`${isFormValid ? "disabled" : "primary"}`}
             type="submit"
             content="Submit"
             handleClick={onSubmit}
