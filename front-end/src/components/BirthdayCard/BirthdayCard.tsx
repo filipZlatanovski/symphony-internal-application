@@ -26,7 +26,7 @@ const BirthdayCard = ({ id, name, lastName, daysLeft, onClick }: BirthdayCardPro
         }}
         onClick={() => onClick(id)}
       >
-        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "left" }}>
           {/* Avatar initials */}
           <Box
             component={motion.div}
