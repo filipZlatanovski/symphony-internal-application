@@ -1,5 +1,6 @@
 import { FilledInput, InputLabel } from "@mui/material";
 import { labelStyles, inputStyles } from "./inputField.styles";
+import type { ChangeEvent } from "react";
 
 interface InputFieldProps {
   type?: "number" | "string" | "text" | "email" | "password" | "date";
@@ -7,8 +8,8 @@ interface InputFieldProps {
   placeholder: string;
   htmlFor: string;
   htmlId: string;
-  value?: string;
-  onChange: (e: any) => void;
+  value: string | number;
+  onValueChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function InputField({
@@ -18,23 +19,23 @@ export default function InputField({
   htmlFor,
   htmlId,
   value,
-  onChange,
+  onValueChange,
 }: InputFieldProps) {
   return (
     <>
-      <div className="pt-[1rem]">
-        <InputLabel htmlFor={htmlFor} sx={labelStyles}>
-          {label}
-        </InputLabel>
+      <InputLabel htmlFor={htmlFor} sx={labelStyles}>
+        {label}
+      </InputLabel>
+      <div className="pb-4">
+        <FilledInput
+          placeholder={placeholder}
+          sx={inputStyles}
+          type={type}
+          id={htmlId}
+          value={value}
+          onChange={onValueChange}
+        />
       </div>
-      <FilledInput
-        placeholder={placeholder}
-        sx={inputStyles}
-        type={type}
-        id={htmlId}
-        value={value}
-        onChange={onChange}
-      />
     </>
   );
 }

@@ -1,23 +1,15 @@
 import TutorialCards from "../TutorialCards/TutorialCards";
-import { tutorialCardsData } from "../../lib/data";
+import { tutorialCardsData, tutorialPageHeadings } from "../../common/data";
 import Button from "../Button/Button";
 
-interface TutorialPageProps {
-  headerTitle: string;
-  description: string;
-}
-
-export default function TutorialPage({
-  headerTitle,
-  description,
-}: TutorialPageProps) {
+export default function TutorialPage() {
   return (
     <>
       <h1 className="text-center mt-[15rem] font-[Poppins] text-4xl font-bold">
-        {headerTitle}
+        {tutorialPageHeadings.headerTitle}
       </h1>
       <p className="font-[Poppins] text-center mt-10 font-light text-xl">
-        {description}
+        {tutorialPageHeadings.descriptionTitle}
       </p>
       <div className="lg:flex justify-center items-center mt-10">
         {tutorialCardsData.map((data) => (

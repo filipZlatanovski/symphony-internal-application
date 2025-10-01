@@ -22,11 +22,11 @@ export default function TutorialCards({
   return (
     <motion.div
       whileHover={{
-        scale: 1.02,
+        scale: 1.05,
         y: -10,
       }}
     >
-      <TutorialCard className="m-5 p-4 cursor-default" square={false}>
+      <TutorialCard className="m-5 cursor-default" square={false}>
         <h2 className="text-center font-[Poppins] font-extrabold mb-10">
           {title}
         </h2>
