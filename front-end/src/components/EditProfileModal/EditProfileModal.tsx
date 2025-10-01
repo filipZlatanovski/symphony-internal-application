@@ -8,11 +8,13 @@ import ModalContainer from "../ModalContainer/ModalContainer";
 interface EditProfileModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSubmit: () => void;
 }
 
 export default function EditProfileModal({
   isOpen,
   onClose,
+  onSubmit,
 }: EditProfileModalProps) {
   const [nicknameValue, setNicknameValue] = useState<string | undefined>("");
   const [bankDetails, setBankDetails] = useState<number | undefined>();
@@ -52,15 +54,7 @@ export default function EditProfileModal({
         onValueChange={handleBankDetailsChange}
       />
       <div className="flex justify-center items-center mt-5">
-        <Button
-          type="submit"
-          content="Submit"
-          handleClick={() => {
-            console.log(
-              "this should submit the values in the db, clear the values and close the modal"
-            );
-          }}
-        />
+        <Button type="submit" content="Submit" handleClick={onSubmit} />
       </div>
     </ModalContainer>
   );

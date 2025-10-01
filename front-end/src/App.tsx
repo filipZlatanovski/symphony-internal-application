@@ -6,6 +6,7 @@ import { useState } from "react";
 import BirthdayModal from "./components/BirthdayModal/BirthdayModal";
 import OrganizerModal from "./components/OrganizerModal/OrganizerModal";
 import { Toaster, toast } from "react-hot-toast";
+import EditProfileModal from "./components/EditProfileModal/EditProfileModal";
 
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,6 +14,16 @@ export default function App() {
   const [isBdayModalOpen, setIsBdayModalOpen] = useState<boolean>(false);
   const [isOrganizerModalOpen, setIsOrganizerModalOpen] =
     useState<boolean>(false);
+  const [isEditProfileModalOpen, setIsEditProfileModalOpen] =
+    useState<boolean>(false);
+
+  const handleOpenEditProfileModal = () => {
+    setIsEditProfileModalOpen(true);
+  };
+
+  const handleCloseEditProfileModal = () => {
+    setIsEditProfileModalOpen(false);
+  };
 
   const handleLoginClick = () => {
     setIsModalOpen(true);
@@ -69,6 +80,12 @@ export default function App() {
         >
           SHOW BDAY MODAL
         </button>
+        <button
+          className="fixed top-40 right-4 bg-[#fe7475] text-white px-4 py-2 rounded-lg z-50"
+          onClick={handleOpenEditProfileModal}
+        >
+          SHOW EDIT PROFILE MODAL
+        </button>
         <BirthdayModal
           open={isBdayModalOpen}
           onClose={handleCloseModal}
@@ -81,6 +98,11 @@ export default function App() {
           isOpen={isOrganizerModalOpen}
           onClose={() => setIsOrganizerModalOpen(false)}
           onSubmit={handleOrganizerSubmit}
+        />
+        <EditProfileModal
+          isOpen={isEditProfileModalOpen}
+          onClose={handleCloseEditProfileModal}
+          onSubmit={handleCloseModal}
         />
       </div>
     );
