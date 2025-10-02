@@ -44,7 +44,7 @@ export default function LandingStepBirthday({
                   content="Next"
                   handleClick={onNext}
                   variant="primary"
-                  disabled={!birthday} // optional: remove if Next should always work
+                  disabled={!birthday}
                   type={"button"}        />
       </div>
     </div>
