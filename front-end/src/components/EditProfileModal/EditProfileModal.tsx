@@ -34,7 +34,9 @@ export default function EditProfileModal({
   return (
     <ModalContainer open={isOpen} onClose={onClose}>
       <CloseButton onClose={onClose} />
-      <TypographyText text="Edit Profile" variant="h3" />
+      <div className="text-center">
+        <TypographyText text="Edit Profile" variant="h3" />
+      </div>
       <InputField
         type="text"
         label="Nickname (Optional)"

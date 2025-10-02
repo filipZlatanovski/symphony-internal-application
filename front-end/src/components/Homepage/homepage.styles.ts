@@ -31,3 +31,16 @@ export const statsStyles = {
   gap: 3,
   mb: 4,
 };
+
+export const containerStatsStyles = {
+  maxWidth: "none !important",
+  px: { xs: 2, sm: 3, md: 4 },
+};
+
+export const sidebarStyles = (sidebar: boolean) => ({
+  flexGrow: 1,
+  p: 4,
+  ml: sidebar ? "100px" : 0,
+  transition: "margin-left 0.3s ease-in-out",
+  width: sidebar ? "calc(100% - 10px)" : "100%",
+});

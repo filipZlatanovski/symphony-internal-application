@@ -4,7 +4,7 @@ import { useState } from "react";
 import Sidebar from "../Sidebar/Sidebar";
 import StatsCard from "../StatsCard/StatsCard";
 import MonthSection from "../MonthSection/MonthSection";
-import BirthdayModal from "../BirthdayModal/BirthdayModal";
+// import BirthdayModal from "../BirthdayModal/BirthdayModal";
 import OrganizerModal from "../OrganizerModal/OrganizerModal";
 import DoubleConfirmationModal from "../DoubleConfirmationModal/DoubleConfirmationModal";
 import { toast, Toaster } from "react-hot-toast";
@@ -13,8 +13,11 @@ import {
   mainCardStyles,
   monthSectionStyles,
   statsStyles,
+  sidebarStyles,
+  containerStatsStyles,
 } from "./homepage.styles";
 import TypographyText from "../TypographyText/TypographyText";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
 const BIRTHDAYS_BY_MONTH = [
   {
@@ -49,9 +52,8 @@ const STATS = [
 
 const Homepage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [isBirthdayModalOpen, setIsBirthdayModalOpen] =
-    useState<boolean>(false);
-  const [selectedBirthday, setSelectedBirthday] = useState<number | null>(null);
+  // const [isBirthdayModalOpen, setIsBirthdayModalOpen] =
+  //   useState<boolean>(false);
   const [isOrganizerModalOpen, setIsOrganizerModalOpen] =
     useState<boolean>(false);
   const [isDoubleConfirmationModalOpen, setIsDoubleConfirmationModalOpen] =
@@ -59,43 +61,38 @@ const Homepage = () => {
   const [confirmationType, setConfirmationType] = useState<
     "contribute" | "organize" | undefined
   >(undefined);
-
-  const handleOrganizerModalOpen = () => {
-    setIsOrganizerModalOpen(true);
-  };
+  const [isEditProfileModalOpen, setIsEditProfileModalOpen] =
+    useState<boolean>(false);
 
   // this function will handle the submition of data from the organizer modal
   // it will also close the modals upon submition
-  const handleOrganizerModalClose = () => {
-    setIsOrganizerModalOpen(false);
-  };
-
-  const handleBirthdayModalClose = () => {
-    setSelectedBirthday(null);
-    setIsBirthdayModalOpen(false);
+  const handleOrganizerModal = () => {
+    setIsOrganizerModalOpen((prevState) => !prevState);
   };
 
   const closeAllModals = () => {
     setIsOrganizerModalOpen(false);
-    setIsBirthdayModalOpen(false);
-    setIsDoubleConfirmationModalOpen(false);
+    //setIsBirthdayModalOpen(false);
+    setIsDoubleConfirmationModalOpen((prevState) => !prevState);
   };
 
-  const handleDoubleConfirmationModalOpen = (
-    type: "contribute" | "organize"
-  ) => {
+  const handleDoubleConfirmationModal = (type: "contribute" | "organize") => {
     setConfirmationType(type);
-    setIsDoubleConfirmationModalOpen(true);
+    setIsDoubleConfirmationModalOpen((prevState) => !prevState);
   };
 
   const handeDoubleConfirmationModalClose = () => {
     setConfirmationType(undefined);
-    setIsDoubleConfirmationModalOpen(false);
+    setIsDoubleConfirmationModalOpen((prevState) => !prevState);
   };
 
   const confirmBirthdayContribution = () => {
-    setIsDoubleConfirmationModalOpen(false);
+    setIsDoubleConfirmationModalOpen((prevState) => !prevState);
     toast.success(`You are contributing to <name's> birthday gift!`);
+  };
+
+  const handleEditProfileModal = () => {
+    setIsEditProfileModalOpen((prevState) => !prevState);
   };
 
   return (
@@ -107,25 +104,14 @@ const Homepage = () => {
           className: "text-center font-light font-[Poppins]",
         }}
       />
-      {isBirthdayModalOpen && selectedBirthday && (
-        <BirthdayModal
-          open={isBirthdayModalOpen}
-          onClose={handleBirthdayModalClose}
-          onOpenOrganizerModal={() => {
-            handleDoubleConfirmationModalOpen("organize");
-          }}
-          onOpenContributorDoubleCheckModal={() => {
-            handleDoubleConfirmationModalOpen("contribute");
-          }}
-        />
-      )}
       {isOrganizerModalOpen && (
         <OrganizerModal
           isOpen={isOrganizerModalOpen}
-          onClose={handleOrganizerModalClose}
+          onClose={() => {
+            closeAllModals();
+          }}
           onSubmit={() => {
             console.log("data sumbiting from organzier modal");
-            handleOrganizerModalClose();
             closeAllModals();
             toast.success(`You are now the organizer of <name's> birthday!`);
           }}
@@ -136,28 +122,29 @@ const Homepage = () => {
           isOpen={isDoubleConfirmationModalOpen}
           onClose={handeDoubleConfirmationModalClose}
           type={confirmationType}
-          openOrganizerModal={handleOrganizerModalOpen}
+          openOrganizerModal={handleOrganizerModal}
           confirmContribution={confirmBirthdayContribution}
+        />
+      )}
+      {isEditProfileModalOpen && (
+        <EditProfileModal
+          isOpen={isEditProfileModalOpen}
+          onClose={handleEditProfileModal}
+          onSubmit={() => {
+            handleEditProfileModal();
+            toast.success("Changes made successfully!");
+          }}
         />
       )}
       <Box sx={mainCardStyles}>
         <Sidebar
           onLogout={() => console.log("Logout")}
-          onEditProfile={() => console.log("Edit Profile")}
+          onEditProfile={handleEditProfileModal}
           onWishlist={function (): void {
             throw new Error("Function not implemented.");
           }}
         />
-        <Box
-          component="main"
-          sx={{
-            flexGrow: 1,
-            p: 4,
-            ml: sidebarOpen ? "100px" : 0,
-            transition: "margin-left 0.3s ease-in-out",
-            width: sidebarOpen ? "calc(100% - 10px)" : "100%",
-          }}
-        >
+        <Box component="main" sx={sidebarStyles(sidebarOpen)}>
           {!sidebarOpen && (
             <IconButton
               onClick={() => setSidebarOpen(true)}
@@ -166,11 +153,8 @@ const Homepage = () => {
               <Menu />
             </IconButton>
           )}
-          <Container
-            maxWidth={false}
-            sx={{ maxWidth: "none !important", px: { xs: 2, sm: 3, md: 4 } }}
-          >
-            <TypographyText variant="h3" text="Welcome back <name>" />
+          <Container maxWidth={false} sx={containerStatsStyles}>
+            <TypographyText variant="h3" text="Welcome back, <name>!" />
             {/* CSS Grid for stats */}
             <Box sx={statsStyles}>
               {STATS.map((s, i) => (
@@ -185,10 +169,10 @@ const Homepage = () => {
                   month={m.month}
                   birthdays={m.birthdays}
                   onContributeButtonClick={() => {
-                    handleDoubleConfirmationModalOpen("contribute");
+                    handleDoubleConfirmationModal("contribute");
                   }}
                   onOrganizeButtonClick={() => {
-                    handleDoubleConfirmationModalOpen("organize");
+                    handleDoubleConfirmationModal("organize");
                   }}
                 />
               ))}
