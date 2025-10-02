@@ -4,13 +4,16 @@ import BirthdayCard from "../BirthdayCard/BirthdayCard.tsx";
 interface MonthSectionProps {
   month: string;
   birthdays: { id: number; name: string; lastName: string; daysLeft: number }[];
-  onCardClick: (id: number) => void;
+  onOrganizeButtonClick: (id: number) => void;
+  onContributeButtonClick: (id: number) => void;
 }
 
 const MonthSection: React.FC<MonthSectionProps> = ({
   month,
   birthdays,
-  onCardClick,
+  //onCardClick,
+  onContributeButtonClick,
+  onOrganizeButtonClick,
 }) => {
   return (
     <Paper sx={{ p: 3, borderRadius: 3 }}>
@@ -29,12 +32,8 @@ const MonthSection: React.FC<MonthSectionProps> = ({
             onWishlistClick={function (id: number): void {
               throw new Error("Function not implemented.");
             }}
-            onOrganize={function (id: number): void {
-              throw new Error("Function not implemented.");
-            }}
-            onContribute={function (id: number): void {
-              throw new Error("Function not implemented.");
-            }} // onClick={() => onCardClick(b.id)} id={0}
+            onOrganize={onOrganizeButtonClick}
+            onContribute={onContributeButtonClick}
           />
         ))}
       </Stack>

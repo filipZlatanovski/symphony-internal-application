@@ -8,6 +8,7 @@ interface DoubleConfirmationModal {
   onClose: () => void;
   type: "organize" | "contribute" | undefined;
   openOrganizerModal: () => void;
+  confirmContribution: () => void;
 }
 
 export default function DoubleConfirmationModal({
@@ -15,13 +16,14 @@ export default function DoubleConfirmationModal({
   onClose,
   type,
   openOrganizerModal,
+  confirmContribution,
 }: DoubleConfirmationModal) {
   return (
     <ModalContainer open={isOpen} onClose={onClose}>
       {type === "contribute" ? (
         <>
           <CloseButton onClose={onClose} />
-          <div className="pt-5">
+          <div className="pt-5 text-center">
             <TypographyText
               text={`Are you sure you want to contribute to <name's> birthday gift?`}
               variant="h6"
@@ -35,9 +37,7 @@ export default function DoubleConfirmationModal({
               content="Yes"
               variant="primary"
               type="submit"
-              handleClick={() => {
-                console.log("contribute");
-              }}
+              handleClick={confirmContribution}
             />
             <Button
               content="No"
@@ -50,7 +50,7 @@ export default function DoubleConfirmationModal({
       ) : (
         <>
           <CloseButton onClose={onClose} />
-          <div className="pt-5">
+          <div className="pt-5 text-center">
             <TypographyText
               text={`Are you sure you want to organize <name's> birthday gift?`}
               variant="h6"

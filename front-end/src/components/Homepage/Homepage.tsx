@@ -1,4 +1,4 @@
-import { Box, Container, Typography, IconButton } from "@mui/material";
+import { Box, Container, IconButton } from "@mui/material";
 import { Menu } from "@mui/icons-material";
 import { useState } from "react";
 import Sidebar from "../Sidebar/Sidebar";
@@ -8,6 +8,13 @@ import BirthdayModal from "../BirthdayModal/BirthdayModal";
 import OrganizerModal from "../OrganizerModal/OrganizerModal";
 import DoubleConfirmationModal from "../DoubleConfirmationModal/DoubleConfirmationModal";
 import { toast, Toaster } from "react-hot-toast";
+import {
+  iconButtonStyles,
+  mainCardStyles,
+  monthSectionStyles,
+  statsStyles,
+} from "./homepage.styles";
+import TypographyText from "../TypographyText/TypographyText";
 
 const BIRTHDAYS_BY_MONTH = [
   {
@@ -61,12 +68,6 @@ const Homepage = () => {
   // it will also close the modals upon submition
   const handleOrganizerModalClose = () => {
     setIsOrganizerModalOpen(false);
-    toast.success(`You are now the organizer of <name's> birthday!`);
-  };
-
-  const handleBirthdayCardClick = (id: number) => {
-    setSelectedBirthday(id);
-    setIsBirthdayModalOpen(true);
   };
 
   const handleBirthdayModalClose = () => {
@@ -90,6 +91,11 @@ const Homepage = () => {
   const handeDoubleConfirmationModalClose = () => {
     setConfirmationType(undefined);
     setIsDoubleConfirmationModalOpen(false);
+  };
+
+  const confirmBirthdayContribution = () => {
+    setIsDoubleConfirmationModalOpen(false);
+    toast.success(`You are contributing to <name's> birthday gift!`);
   };
 
   return (
@@ -121,6 +127,7 @@ const Homepage = () => {
             console.log("data sumbiting from organzier modal");
             handleOrganizerModalClose();
             closeAllModals();
+            toast.success(`You are now the organizer of <name's> birthday!`);
           }}
         />
       )}
@@ -130,11 +137,10 @@ const Homepage = () => {
           onClose={handeDoubleConfirmationModalClose}
           type={confirmationType}
           openOrganizerModal={handleOrganizerModalOpen}
+          confirmContribution={confirmBirthdayContribution}
         />
       )}
-      <Box
-        sx={{ display: "flex", minHeight: "100vh", backgroundColor: "#f4f5fb" }}
-      >
+      <Box sx={mainCardStyles}>
         <Sidebar
           onLogout={() => console.log("Logout")}
           onEditProfile={() => console.log("Edit Profile")}
@@ -142,7 +148,6 @@ const Homepage = () => {
             throw new Error("Function not implemented.");
           }}
         />
-
         <Box
           component="main"
           sx={{
@@ -156,62 +161,35 @@ const Homepage = () => {
           {!sidebarOpen && (
             <IconButton
               onClick={() => setSidebarOpen(true)}
-              sx={{
-                position: "fixed",
-                top: 16,
-                left: 16,
-                zIndex: 1300,
-                backgroundColor: "#6c69ff",
-                color: "white",
-                "&:hover": {
-                  backgroundColor: "#5854e6",
-                },
-              }}
+              sx={iconButtonStyles}
             >
               <Menu />
             </IconButton>
           )}
-
           <Container
             maxWidth={false}
             sx={{ maxWidth: "none !important", px: { xs: 2, sm: 3, md: 4 } }}
           >
-            <Typography
-              variant="h3"
-              sx={{
-                mb: 4,
-                fontFamily: "Poppins, sans-serif",
-                fontWeight: "bold",
-              }}
-            >
-              Welcome back, Alex! 🎉
-            </Typography>
-
+            <TypographyText variant="h3" text="Welcome back <name>" />
             {/* CSS Grid for stats */}
-            <Box
-              sx={{
-                display: "grid",
-                gridTemplateColumns: {
-                  xs: "1fr",
-                  md: "repeat(3, 1fr)",
-                },
-                gap: 3,
-                mb: 4,
-              }}
-            >
+            <Box sx={statsStyles}>
               {STATS.map((s, i) => (
                 <StatsCard key={i} {...s} />
               ))}
             </Box>
-
             {/* Simple Box for month sections */}
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            <Box sx={monthSectionStyles}>
               {BIRTHDAYS_BY_MONTH.map((m, i) => (
                 <MonthSection
                   key={i}
                   month={m.month}
                   birthdays={m.birthdays}
-                  onCardClick={handleBirthdayCardClick}
+                  onContributeButtonClick={() => {
+                    handleDoubleConfirmationModalOpen("contribute");
+                  }}
+                  onOrganizeButtonClick={() => {
+                    handleDoubleConfirmationModalOpen("organize");
+                  }}
                 />
               ))}
             </Box>

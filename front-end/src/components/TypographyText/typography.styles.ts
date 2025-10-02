@@ -2,7 +2,7 @@ const typographyStyle = {
   fontFamily: "Poppins",
   fontWeight: 700,
   whiteSpace: "wrap",
-  textAlign: "center",
+  mb: 5,
 };
 
 export default typographyStyle;
