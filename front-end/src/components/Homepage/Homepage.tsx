@@ -1,5 +1,4 @@
-import { Box, Container, IconButton } from "@mui/material";
-import { Menu } from "@mui/icons-material";
+import { Box, Container } from "@mui/material";
 import { useState } from "react";
 import Sidebar from "../Sidebar/Sidebar";
 import MonthSection from "../MonthSection/MonthSection";
@@ -8,14 +7,7 @@ import MonthSection from "../MonthSection/MonthSection";
 import OrganizerModal from "../OrganizerModal/OrganizerModal";
 import DoubleConfirmationModal from "../DoubleConfirmationModal/DoubleConfirmationModal";
 import { toast, Toaster } from "react-hot-toast";
-import {
-  iconButtonStyles,
-  mainCardStyles,
-  monthSectionStyles,
-  statsStyles,
-  sidebarStyles,
-  containerStatsStyles,
-} from "./homepage.styles";
+import { monthSectionStyles, containerStatsStyles } from "./homepage.styles";
 import TypographyText from "../TypographyText/TypographyText";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import WishlistDrawer from "../WishlistDrawer/WishlistDrawer";
@@ -77,8 +69,7 @@ const Homepage = () => {
   };
 
   const closeAllModals = () => {
-    setIsOrganizerModalOpen(false);
-    //setIsBirthdayModalOpen(false);
+    setIsOrganizerModalOpen((prevState) => !prevState);
     setIsDoubleConfirmationModalOpen((prevState) => !prevState);
   };
 
@@ -156,7 +147,7 @@ const Homepage = () => {
           open={sidebarOpen}
           setOpen={setSidebarOpen}
           onLogout={() => console.log("Logout")}
-          onEditProfile={() => console.log("Edit Profile")}
+          onEditProfile={handleEditProfileModal}
           onWishlist={() => console.log("Wishlist")}
         />
         <Box
@@ -189,9 +180,7 @@ const Homepage = () => {
                   onOrganizeButtonClick={() => {
                     handleDoubleConfirmationModal("organize");
                   }}
-                  onWishlistButtonClick={() => {
-                    handleDrawerVisible();
-                  }}
+                  onWishlistButtonClick={handleDrawerVisible}
                 />
               ))}
             </Box>
