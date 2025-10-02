@@ -31,7 +31,7 @@ export default function LandingStepBirthday({
           htmlFor="birthday"
           htmlId="birthday"
           value={birthday}
-          onChange={(e) => onChange(e.target.value)}
+          onValueChange={(e) => onChange(e.target.value)}
         />
       </div>
 
@@ -44,7 +44,7 @@ export default function LandingStepBirthday({
                   content="Next"
                   handleClick={onNext}
                   variant="primary"
-                  disabled={!birthday} // optional: remove if Next should always work
+                  disabled={!birthday}
                   type={"button"}        />
       </div>
     </div>

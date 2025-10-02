@@ -22,39 +22,22 @@ const Homepage = () => {
   return (
     <Box sx={{ display: "flex", minHeight: "100vh", backgroundColor: "#f4f5fb" }}>
       <Sidebar 
+        open={sidebarOpen}
+        setOpen={setSidebarOpen}
         onLogout={() => console.log("Logout")}
-        onEditProfile={() => console.log("Edit Profile")} onWishlist={function (): void {
-          throw new Error("Function not implemented.");
-        } }      />
+        onEditProfile={() => console.log("Edit Profile")} 
+        onWishlist={() => console.log("Wishlist")} 
+      />
 
       <Box 
         component="main" 
         sx={{ 
           flexGrow: 1, 
           p: 4, 
-          ml: sidebarOpen ? "100px" : 0,
-          transition: "margin-left 0.3s ease-in-out",
-          width: sidebarOpen ? "calc(100% - 10px)" : "100%"
+          ml: sidebarOpen ? "260px" : "90px",
+          transition: "margin-left 0.4s ease-in-out",
         }}
       >
-        {!sidebarOpen && (
-          <IconButton 
-            onClick={() => setSidebarOpen(true)}
-            sx={{
-              position: "fixed",
-              top: 16,
-              left: 16,
-              zIndex: 1300,
-              backgroundColor: "#6c69ff",
-              color: "white",
-              "&:hover": {
-                backgroundColor: "#5854e6",
-              }
-            }}
-          >
-            <Menu />
-          </IconButton>
-        )}
 
         <Container maxWidth={false} sx={{ maxWidth: "none !important", px: { xs: 2, sm: 3, md: 4 } }}>
           <Typography 

@@ -1,13 +1,15 @@
-import { Box, Avatar, IconButton, Tooltip } from "@mui/material";
-import { Edit, CardGiftcard, Logout } from "@mui/icons-material";
+import { Box, IconButton, Typography } from "@mui/material";
+import { Edit, CardGiftcard, Logout, Menu } from "@mui/icons-material";
 
 interface SidebarProps {
+  open: boolean;
+  setOpen: (open: boolean) => void;
   onEditProfile: () => void;
   onWishlist: () => void;
   onLogout: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ onEditProfile, onWishlist, onLogout }) => {
+const Sidebar: React.FC<SidebarProps> = ({ open, setOpen, onEditProfile, onWishlist, onLogout }) => {
   return (
     <Box
       sx={{
@@ -15,72 +17,139 @@ const Sidebar: React.FC<SidebarProps> = ({ onEditProfile, onWishlist, onLogout }
         left: 0,
         top: 0,
         bottom: 0,
-        width: { xs: 72, sm: 96 },
+        width: open ? 260 : 90, // expanded vs collapsed
         bgcolor: "#fff",
         borderRight: "1px solid #eee",
         display: "flex",
         flexDirection: "column",
-        alignItems: "center",
+        alignItems: "flex-start",
         py: 3,
-        px: 1,
+        px: 2,
         zIndex: 1000,
+        transition: "width 0.25s ease",
       }}
     >
-      
+      {/* Toggle button */}
+      <IconButton onClick={() => setOpen(!open)} sx={{ mb: 4, alignSelf: open ? "flex-end" : "center" }}>
+        <Menu />
+      </IconButton>
 
-      {/* Profile Icon */}
-      <Tooltip title="Edit Profile" placement="right">
+      {/* Profile */}
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          mb: 3,
+          cursor: "pointer",
+          width: "100%",
+        }}
+        onClick={onEditProfile}
+      >
         <IconButton
-          onClick={onEditProfile}
           sx={{
-            mb: 3,
             bgcolor: "#6c69ff",
             color: "#fff",
-            width: { xs: 48, sm: 64 },
-            height: { xs: 48, sm: 64 },
+            width: 56,
+            height: 56,
             "&:hover": { bgcolor: "#6c69ff" },
           }}
         >
           <Edit />
         </IconButton>
-      </Tooltip>
-
-      {/* Wishlist Icon */}
-      <Tooltip title="My Wishlist" placement="right">
-        <IconButton
-          onClick={onWishlist}
+        <Typography
           sx={{
-            mb: 3,
+            ml: 2,
+            fontWeight: 500,
+            fontFamily: "Poppins, sans-serif",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            opacity: open ? 1 : 0,
+            maxWidth: open ? 200 : 0,
+            transition: "all 0.2s ease",
+          }}
+        >
+          Edit Profile
+        </Typography>
+      </Box>
+
+      {/* Wishlist */}
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          mb: 3,
+          cursor: "pointer",
+          width: "100%",
+        }}
+        onClick={onWishlist}
+      >
+        <IconButton
+          sx={{
             bgcolor: "#ffbe3d",
             color: "#000",
-            width: { xs: 48, sm: 64 },
-            height: { xs: 48, sm: 64 },
+            width: 56,
+            height: 56,
             "&:hover": { bgcolor: "#f0b02e" },
           }}
         >
           <CardGiftcard />
         </IconButton>
-      </Tooltip>
+        <Typography
+          sx={{
+            ml: 2,
+            fontWeight: 500,
+            fontFamily: "Poppins, sans-serif",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            opacity: open ? 1 : 0,
+            maxWidth: open ? 200 : 0,
+            transition: "all 0.2s ease",
+          }}
+        >
+          My Wishlist
+        </Typography>
+      </Box>
 
       {/* Spacer */}
       <Box sx={{ flexGrow: 1 }} />
 
-      {/* Logout Icon */}
-      <Tooltip title="Logout" placement="right">
+      {/* Logout */}
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          mb: 3,
+          cursor: "pointer",
+          width: "100%",
+        }}
+        onClick={onLogout}
+      >
         <IconButton
-          onClick={onLogout}
           sx={{
-            mb: 3,
             bgcolor: "#f4f5fb",
             color: "#ff4d4d",
-            width: { xs: 48, sm: 64 },
-            height: { xs: 48, sm: 64 },
+            width: 56,
+            height: 56,
             "&:hover": { bgcolor: "#fce4e4" },
           }}
         >
           <Logout />
         </IconButton>
-      </Tooltip>
+        <Typography
+          sx={{
+            ml: 2,
+            fontWeight: 500,
+            fontFamily: "Poppins, sans-serif",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            opacity: open ? 1 : 0,
+            maxWidth: open ? 200 : 0,
+            transition: "all 0.2s ease",
+          }}
+        >
+          Logout
+        </Typography>
+      </Box>
     </Box>
   );
 };
