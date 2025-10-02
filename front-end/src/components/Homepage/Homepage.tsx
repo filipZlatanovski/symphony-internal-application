@@ -2,21 +2,21 @@ import { Box, Container, Typography, IconButton } from "@mui/material";
 import { Menu } from "@mui/icons-material";
 import { useState } from "react";
 import Sidebar from "../Sidebar/Sidebar";
-import StatsCard from "../StatsCard/StatsCard";
+// import StatsCard from "../StatsCard/StatsCard";
 import MonthSection from "../MonthSection/MonthSection";
 
 const Homepage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
-  const stats = [
-    { label: "Upcoming Birthdays", value: 3, sublabel: "Next 30 days" },
-    { label: "Active Celebrations", value: 2, sublabel: "You're contributing to" },
-    { label: "Team Members", value: 24, sublabel: "In your circle" },
-  ];
+  // const stats = [
+  //   { label: "Upcoming Birthdays", value: 3, sublabel: "Next 30 days" },
+  //   { label: "Active Celebrations", value: 2, sublabel: "You're contributing to" },
+  //   { label: "Team Members", value: 24, sublabel: "In your circle" },
+  // ];
 
   const birthdaysByMonth = [
-    { month: "October 2025", birthdays: [{ id: 1, name: "John", lastName: "Doe", daysLeft: 8 },{ id: 1, name: "John", lastName: "Doe", daysLeft: 13 },{ id: 1, name: "John", lastName: "Doe", daysLeft: 15 },{ id: 1, name: "John", lastName: "Doe", daysLeft: 18 }] },
-    { month: "November 2025", birthdays: [{ id: 2, name: "Sarah", lastName: "Smith", daysLeft: 22 }, {id:3, name: "Jane", lastName: "Johnson", daysLeft: 26}, {id:4, name: "Pam", lastName: "Beasly", daysLeft: 36}, {id:5, name:"Lila", lastName:"Slay", daysLeft: 77}] },
+    { month: "October 2025", birthdays: [{ id: 1, name: "John", lastName: "Doe", daysLeft: 8 },{id:3, name: "Jane", lastName: "Johnson", daysLeft: 26},{ id: 1, name: "Larra", lastName: "Smith", daysLeft: 15 },{ id: 1, name: "Emma", lastName: "Doe", daysLeft: 18 }] },
+    { month: "November 2025", birthdays: [{id:3, name: "Jane", lastName: "Johnson", daysLeft: 26}, {id:4, name: "Pam", lastName: "Beasly", daysLeft: 36}, {id:5, name:"Anna", lastName:"Smith", daysLeft: 77}] },
   ];
 
   return (
@@ -69,7 +69,7 @@ const Homepage = () => {
           </Typography>
 
           {/* CSS Grid for stats */}
-          <Box 
+          {/* <Box 
             sx={{ 
               display: 'grid',
               gridTemplateColumns: {
@@ -83,10 +83,10 @@ const Homepage = () => {
             {stats.map((s, i) => (
               <StatsCard key={i} {...s} />
             ))}
-          </Box>
+          </Box> */}
 
           {/* Simple Box for month sections */}
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
             {birthdaysByMonth.map((m, i) => (
               <MonthSection 
                 key={i}
