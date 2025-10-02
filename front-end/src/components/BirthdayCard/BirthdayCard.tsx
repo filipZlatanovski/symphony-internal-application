@@ -3,6 +3,13 @@ import { motion } from "framer-motion";
 import { CardGiftcard } from "@mui/icons-material";
 import Button from "../Button/Button";
 import Tooltip from "../Tooltip/Tooltip";
+import {
+  birthdayCardStyles,
+  birthdayCardTopRow,
+  birthdayCardAvatarStyles,
+  birthdayCardWishlistButtonStyles,
+  birthdayCardButtonsContainer,
+} from "./birthdayCard.styles";
 
 interface BirthdayCardProps {
   id: number;
@@ -27,43 +34,14 @@ const BirthdayCard = ({
 }: BirthdayCardProps) => {
   return (
     <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
-      <Paper
-        sx={{
-          p: 3,
-          borderRadius: 3,
-          border: "1px solid",
-          borderColor: "grey.200",
-          "&:hover": {
-            borderColor: "#6c69ff",
-            boxShadow: 6,
-          },
-        }}
-      >
+      <Paper sx={birthdayCardStyles}>
         {/* Top Row */}
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
+        <Box sx={birthdayCardTopRow}>
           {/* Avatar initials */}
           <Box
             component={motion.div}
             whileHover={{ scale: 1.1 }}
-            sx={{
-              width: 64,
-              height: 64,
-              borderRadius: "50%",
-              bgcolor: "#fe7475",
-              color: "white",
-              fontWeight: "bold",
-              fontSize: "1.25rem",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              mr: 2,
-            }}
+            sx={birthdayCardAvatarStyles}
           >
             {name[0]}
             {lastName[0]}
@@ -83,13 +61,7 @@ const BirthdayCard = ({
           <Tooltip title={`<name's> wishlist`} arrow placement="top">
             <IconButton
               onClick={() => onWishlistClick(id)}
-              sx={{
-                bgcolor: "#ffbe3d",
-                color: "white",
-                "&:hover": { bgcolor: "#fe7475" },
-                width: 48,
-                height: 48,
-              }}
+              sx={birthdayCardWishlistButtonStyles}
             >
               <CardGiftcard />
             </IconButton>
@@ -97,9 +69,7 @@ const BirthdayCard = ({
         </Box>
 
         {/* Bottom Buttons */}
-        <Box
-          sx={{ display: "flex", justifyContent: "flex-end", mt: 3, gap: 2 }}
-        >
+        <Box sx={birthdayCardButtonsContainer}>
           <Button
             type="button"
             content="Organize"

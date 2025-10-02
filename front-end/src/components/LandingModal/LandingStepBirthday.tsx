@@ -37,15 +37,18 @@ export default function LandingStepBirthday({
 
       <div className="flex gap-3 justify-center mt-4">
         <Button
-                  content="Skip"
-                  handleClick={onSkip}
-                  variant="skip" type={"button"}        />
+          content="Skip"
+          handleClick={onSkip}
+          variant="skip"
+          type={"button"}
+        />
         <Button
-                  content="Next"
-                  handleClick={onNext}
-                  variant="primary"
-                  disabled={!birthday}
-                  type={"button"}        />
+          content="Next"
+          handleClick={onNext}
+          variant="primary"
+          disabled={!birthday}
+          type={"button"}
+        />
       </div>
     </div>
   );

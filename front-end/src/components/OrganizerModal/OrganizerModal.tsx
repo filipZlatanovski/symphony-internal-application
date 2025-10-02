@@ -41,7 +41,7 @@ export default function OrganizerModal({
           htmlFor="aria-bankDetails-label"
           htmlId="aria-bankDetails-label"
           label="Bank Details"
-          value={bankDetails!}
+          value={bankDetails}
           onValueChange={handleBankDetailsChange}
         />
         <div className="flex justify-center items-center mt-5">

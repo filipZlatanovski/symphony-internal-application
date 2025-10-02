@@ -1,6 +1,5 @@
-export const birthdayCardPaperStyles = {
+export const birthdayCardStyles = {
   p: 3,
-  cursor: "pointer",
   borderRadius: 3,
   border: "1px solid",
   borderColor: "grey.200",
@@ -10,10 +9,10 @@ export const birthdayCardPaperStyles = {
   },
 };
 
-export const birthdayCardBoxStyles = {
+export const birthdayCardTopRow = {
   display: "flex",
+  alignItems: "center",
   justifyContent: "space-between",
-  alignItems: "left",
 };
 
 export const birthdayCardAvatarStyles = {
@@ -28,5 +27,19 @@ export const birthdayCardAvatarStyles = {
   alignItems: "center",
   justifyContent: "center",
   mr: 2,
-  "&:hover": { bgcolor: "#6c69ff" },
+};
+
+export const birthdayCardWishlistButtonStyles = {
+  bgcolor: "#ffbe3d",
+  color: "white",
+  "&:hover": { bgcolor: "#fe7475" },
+  width: 50,
+  height: 50,
+};
+
+export const birthdayCardButtonsContainer = {
+  display: "flex",
+  justifyContent: "flex-end",
+  mt: 3,
+  gap: 2,
 };

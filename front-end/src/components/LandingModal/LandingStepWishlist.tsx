@@ -40,13 +40,17 @@ export default function LandingStepWishlist({
 
       <div className="flex gap-3 justify-center mt-4">
         <Button
-                  content="Skip"
-                  handleClick={onSkip}
-                  variant="skip" type={"button"}        />
+          content="Skip"
+          handleClick={onSkip}
+          variant="skip"
+          type={"button"}
+        />
         <Button
-                  content="Complete Setup"
-                  handleClick={onComplete}
-                  variant="accent" type={"button"}        />
+          content="Complete Setup"
+          handleClick={onComplete}
+          variant="accent"
+          type={"button"}
+        />
       </div>
     </div>
   );
