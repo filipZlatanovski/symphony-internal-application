@@ -10,6 +10,8 @@ const modalContainerStyles = {
   boxShadow: 24,
   p: { xs: 3, md: 4 },
   fontFamily: "Poppins",
+  maxHeight: "100vh",
+  overflowY: "auto",
 };
 
 export default modalContainerStyles;

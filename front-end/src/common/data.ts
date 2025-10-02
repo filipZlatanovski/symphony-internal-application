@@ -4,12 +4,23 @@ type TutorialCardsData = {
   description: string;
 };
 
+type TutorialPageHeadings = {
+  headerTitle: string;
+  descriptionTitle: string;
+};
+
+export const tutorialPageHeadings: TutorialPageHeadings = {
+  headerTitle: "Welcome to the official Symphony Birthday Planner 🎉",
+  descriptionTitle:
+    "Here is a small walkthrough of what to expect from the app!",
+};
+
 export const tutorialCardsData: TutorialCardsData[] = [
   {
     id: 1,
     title: "Organize A Birthday",
     description:
-      "Plan the perfect celebration. Set yourself as an organizer, collect funds and by the perfect gift.",
+      "Plan the perfect celebration. Set yourself as an organizer, collect funds and buy the perfect gift.",
   },
   {
     id: 2,

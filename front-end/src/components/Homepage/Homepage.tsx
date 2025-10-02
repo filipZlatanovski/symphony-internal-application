@@ -86,7 +86,7 @@ const Homepage = () => {
           </Box> */}
 
           {/* Simple Box for month sections */}
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             {birthdaysByMonth.map((m, i) => (
               <MonthSection 
                 key={i}
