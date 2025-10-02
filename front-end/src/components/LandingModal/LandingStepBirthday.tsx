@@ -31,7 +31,7 @@ export default function LandingStepBirthday({
           htmlFor="birthday"
           htmlId="birthday"
           value={birthday}
-          onChange={(e) => onChange(e.target.value)}
+          onValueChange={(e) => onChange(e.target.value)}
         />
       </div>
 
