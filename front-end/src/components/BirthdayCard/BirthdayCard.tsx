@@ -2,6 +2,7 @@ import { Paper, Typography, Box, IconButton } from "@mui/material";
 import { motion } from "framer-motion";
 import { CardGiftcard } from "@mui/icons-material";
 import Button from "../Button/Button";
+import Tooltip from "../Tooltip/Tooltip";
 
 interface BirthdayCardProps {
   id: number;
@@ -39,7 +40,13 @@ const BirthdayCard = ({
         }}
       >
         {/* Top Row */}
-        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
           {/* Avatar initials */}
           <Box
             component={motion.div}
@@ -73,24 +80,38 @@ const BirthdayCard = ({
           </Box>
 
           {/* Wishlist button */}
-          <IconButton
-            onClick={() => onWishlistClick(id)}
-            sx={{
-              bgcolor: "#ffbe3d",
-              color: "white",
-              "&:hover": { bgcolor: "#fe7475" },
-              width: 48,
-              height: 48,
-            }}
-          >
-            <CardGiftcard />
-          </IconButton>
+          <Tooltip title={`<name's> wishlist`} arrow placement="top">
+            <IconButton
+              onClick={() => onWishlistClick(id)}
+              sx={{
+                bgcolor: "#ffbe3d",
+                color: "white",
+                "&:hover": { bgcolor: "#fe7475" },
+                width: 48,
+                height: 48,
+              }}
+            >
+              <CardGiftcard />
+            </IconButton>
+          </Tooltip>
         </Box>
 
         {/* Bottom Buttons */}
-        <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 3, gap: 2 }}>
-          <Button type="button" content="Organize" handleClick={() => onOrganize(id)} variant="primary" />
-          <Button type="button" content="Contribute" handleClick={() => onContribute(id)} variant="secondary" />
+        <Box
+          sx={{ display: "flex", justifyContent: "flex-end", mt: 3, gap: 2 }}
+        >
+          <Button
+            type="button"
+            content="Organize"
+            handleClick={() => onOrganize(id)}
+            variant="primary"
+          />
+          <Button
+            type="button"
+            content="Contribute"
+            handleClick={() => onContribute(id)}
+            variant="secondary"
+          />
         </Box>
       </Paper>
     </motion.div>
