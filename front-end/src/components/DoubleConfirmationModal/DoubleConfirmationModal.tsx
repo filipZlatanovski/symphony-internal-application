@@ -6,13 +6,15 @@ import TypographyText from "../TypographyText/TypographyText";
 interface DoubleConfirmationModal {
   isOpen: boolean;
   onClose: () => void;
-  type: "organize" | "contribute";
+  type: "organize" | "contribute" | undefined;
+  openOrganizerModal: () => void;
 }
 
 export default function DoubleConfirmationModal({
   isOpen,
   onClose,
   type,
+  openOrganizerModal,
 }: DoubleConfirmationModal) {
   return (
     <ModalContainer open={isOpen} onClose={onClose}>
@@ -34,16 +36,14 @@ export default function DoubleConfirmationModal({
               variant="primary"
               type="submit"
               handleClick={() => {
-                console.log("this will close the modal and open a drawer");
+                console.log("contribute");
               }}
             />
             <Button
               content="No"
               variant="secondary"
               type="button"
-              handleClick={() => {
-                console.log("this will close the modal");
-              }}
+              handleClick={onClose}
             />
           </div>
         </>
@@ -61,19 +61,13 @@ export default function DoubleConfirmationModal({
               content="Yes"
               variant="primary"
               type="submit"
-              handleClick={() => {
-                console.log(
-                  "this will close the modal and open a drawer with 2 inputs, bank details and minAmount"
-                );
-              }}
+              handleClick={openOrganizerModal}
             />
             <Button
               content="No"
               variant="secondary"
               type="button"
-              handleClick={() => {
-                console.log("this will close the modal");
-              }}
+              handleClick={onClose}
             />
           </div>
         </>

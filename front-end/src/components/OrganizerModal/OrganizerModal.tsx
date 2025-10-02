@@ -32,7 +32,9 @@ export default function OrganizerModal({
       <Box sx={organizerModal}>
         <CloseButton onClose={onClose} />
         {/* this should be wrapped in a form component later on */}
-        <TypographyText text="One Step Closer!" variant="h3" />
+        <div className="m-4">
+          <TypographyText text="One Step Closer!" variant="h3" />
+        </div>
         <InputField
           type="number"
           placeholder="Enter your bank details - e.g 30000XXX"
