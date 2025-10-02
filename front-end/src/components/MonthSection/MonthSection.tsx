@@ -6,14 +6,15 @@ interface MonthSectionProps {
   birthdays: { id: number; name: string; lastName: string; daysLeft: number }[];
   onOrganizeButtonClick: (id: number) => void;
   onContributeButtonClick: (id: number) => void;
+  onWishlistButtonClick: (id: number) => void;
 }
 
 const MonthSection: React.FC<MonthSectionProps> = ({
   month,
   birthdays,
-  //onCardClick,
   onContributeButtonClick,
   onOrganizeButtonClick,
+  onWishlistButtonClick,
 }) => {
   return (
     <Paper sx={{ p: 3, borderRadius: 3 }}>
@@ -29,9 +30,7 @@ const MonthSection: React.FC<MonthSectionProps> = ({
             daysLeft={b.daysLeft}
             id={0}
             birthdayDate={""}
-            onWishlistClick={function (id: number): void {
-              throw new Error("Function not implemented.");
-            }}
+            onWishlistClick={onWishlistButtonClick}
             onOrganize={onOrganizeButtonClick}
             onContribute={onContributeButtonClick}
           />

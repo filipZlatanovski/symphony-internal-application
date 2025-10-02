@@ -18,6 +18,7 @@ import {
 } from "./homepage.styles";
 import TypographyText from "../TypographyText/TypographyText";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
+import WishlistDrawer from "../WishlistDrawer/WishlistDrawer";
 
 const BIRTHDAYS_BY_MONTH = [
   {
@@ -63,6 +64,11 @@ const Homepage = () => {
   >(undefined);
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] =
     useState<boolean>(false);
+  const [drawerVisible, setDrawerVisible] = useState<boolean>(false);
+
+  const handleDrawerVisible = () => {
+    setDrawerVisible((prevState) => !prevState);
+  };
 
   // this function will handle the submition of data from the organizer modal
   // it will also close the modals upon submition
@@ -136,20 +142,32 @@ const Homepage = () => {
           }}
         />
       )}
-      <Box sx={{ display: "flex", minHeight: "100vh", backgroundColor: "#f4f5fb" }}>
-        <Sidebar 
+      {drawerVisible && (
+        <WishlistDrawer
+          anchor="right"
+          isOpen={drawerVisible}
+          onClose={handleDrawerVisible}
+        />
+      )}
+      <Box
+        sx={{ display: "flex", minHeight: "100vh", backgroundColor: "#f4f5fb" }}
+      >
+        <Sidebar
           open={sidebarOpen}
           setOpen={setSidebarOpen}
           onLogout={() => console.log("Logout")}
-          onEditProfile={() => console.log("Edit Profile")} 
-          onWishlist={() => console.log("Wishlist")} 
-          />
-        <Box component="main" sx={{ 
-          flexGrow: 1, 
-          p: 4, 
-          ml: sidebarOpen ? "260px" : "90px",
-          transition: "margin-left 0.4s ease-in-out",
-        }}>
+          onEditProfile={() => console.log("Edit Profile")}
+          onWishlist={() => console.log("Wishlist")}
+        />
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            p: 4,
+            ml: sidebarOpen ? "260px" : "90px",
+            transition: "margin-left 0.4s ease-in-out",
+          }}
+        >
           <Container maxWidth={false} sx={containerStatsStyles}>
             <TypographyText variant="h3" text="Welcome back, <name>!" />
             {/* CSS Grid for stats
@@ -170,6 +188,9 @@ const Homepage = () => {
                   }}
                   onOrganizeButtonClick={() => {
                     handleDoubleConfirmationModal("organize");
+                  }}
+                  onWishlistButtonClick={() => {
+                    handleDrawerVisible();
                   }}
                 />
               ))}
