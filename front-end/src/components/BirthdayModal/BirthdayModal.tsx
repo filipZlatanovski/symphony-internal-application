@@ -9,12 +9,14 @@ interface BirthdayModalProps {
   open: boolean;
   onClose: () => void;
   onOpenOrganizerModal: () => void;
+  onOpenContributorDoubleCheckModal: () => void;
 }
 
 export default function BirthdayModal({
   open,
   onClose,
   onOpenOrganizerModal,
+  onOpenContributorDoubleCheckModal,
 }: BirthdayModalProps) {
   return (
     <Modal open={open} onClose={onClose}>
@@ -26,9 +28,7 @@ export default function BirthdayModal({
             <WishlistContent />
           </div>
           <BirthdayModalRightSide
-            handleContributeBirthday={() => {
-              console.log("random");
-            }}
+            handleContributeBirthday={onOpenContributorDoubleCheckModal}
             handleOrganizeBirthday={onOpenOrganizerModal}
           />
         </div>

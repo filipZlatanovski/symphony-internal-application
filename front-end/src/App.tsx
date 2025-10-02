@@ -3,27 +3,14 @@ import LandingModal from "./components/LandingModal/LandingModal";
 import Homepage from "./components/Homepage/Homepage";
 import symphonyLogoImagef from "./assets/BirthdayPlanner.svg";
 import { useState } from "react";
-import BirthdayModal from "./components/BirthdayModal/BirthdayModal";
 import OrganizerModal from "./components/OrganizerModal/OrganizerModal";
 import { Toaster, toast } from "react-hot-toast";
-import EditProfileModal from "./components/EditProfileModal/EditProfileModal";
 
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showHomepage, setShowHomepage] = useState(true); // Set to true to start with homepage
-  const [isBdayModalOpen, setIsBdayModalOpen] = useState<boolean>(false);
   const [isOrganizerModalOpen, setIsOrganizerModalOpen] =
     useState<boolean>(false);
-  const [isEditProfileModalOpen, setIsEditProfileModalOpen] =
-    useState<boolean>(false);
-
-  const handleOpenEditProfileModal = () => {
-    setIsEditProfileModalOpen(true);
-  };
-
-  const handleCloseEditProfileModal = () => {
-    setIsEditProfileModalOpen(false);
-  };
 
   const handleLoginClick = () => {
     setIsModalOpen(true);
@@ -40,18 +27,11 @@ export default function App() {
   const toggleView = () => {
     setShowHomepage(!showHomepage);
   };
-  const handleOpenModal = () => {
-    setIsBdayModalOpen(true);
-  };
-  const handleCloseModal = () => {
-    setIsBdayModalOpen(false);
-  };
 
   // this function will handle the submition of data from the organizer modal
   // it will also close the modals upon submition
   const handleOrganizerSubmit = () => {
     setIsOrganizerModalOpen(false);
-    setIsBdayModalOpen(false);
     toast.success(
       "Congrats! You are now the organizer of <name's> birthday party!"
     );
@@ -74,35 +54,24 @@ export default function App() {
         >
           Show Login
         </button>
-        <button
-          className="fixed top-20 right-4 bg-[#fe7475] text-white px-4 py-2 rounded-lg z-50"
-          onClick={handleOpenModal}
-        >
-          SHOW BDAY MODAL
-        </button>
-        <button
+        {/* <button
           className="fixed top-40 right-4 bg-[#fe7475] text-white px-4 py-2 rounded-lg z-50"
           onClick={handleOpenEditProfileModal}
         >
           SHOW EDIT PROFILE MODAL
-        </button>
-        <BirthdayModal
+        </button> */}
+        {/* <BirthdayModal
           open={isBdayModalOpen}
           onClose={handleCloseModal}
           onOpenOrganizerModal={() => {
             console.log("random text");
             setIsOrganizerModalOpen(true);
           }}
-        />
+        /> */}
         <OrganizerModal
           isOpen={isOrganizerModalOpen}
           onClose={() => setIsOrganizerModalOpen(false)}
           onSubmit={handleOrganizerSubmit}
-        />
-        <EditProfileModal
-          isOpen={isEditProfileModalOpen}
-          onClose={handleCloseEditProfileModal}
-          onSubmit={handleCloseModal}
         />
       </div>
     );
