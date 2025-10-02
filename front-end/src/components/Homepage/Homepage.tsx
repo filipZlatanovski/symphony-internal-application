@@ -18,6 +18,7 @@ import {
 } from "./homepage.styles";
 import TypographyText from "../TypographyText/TypographyText";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
+import WishlistDrawer from "../WishlistDrawer/WishlistDrawer";
 
 const BIRTHDAYS_BY_MONTH = [
   {
@@ -63,6 +64,11 @@ const Homepage = () => {
   >(undefined);
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] =
     useState<boolean>(false);
+  const [drawerVisible, setDrawerVisible] = useState<boolean>(false);
+
+  const handleDrawerVisible = () => {
+    setDrawerVisible((prevState) => !prevState);
+  };
 
   // this function will handle the submition of data from the organizer modal
   // it will also close the modals upon submition
@@ -136,6 +142,13 @@ const Homepage = () => {
           }}
         />
       )}
+      {drawerVisible && (
+        <WishlistDrawer
+          anchor="right"
+          isOpen={drawerVisible}
+          onClose={handleDrawerVisible}
+        />
+      )}
       <Box sx={mainCardStyles}>
         <Sidebar
           onLogout={() => console.log("Logout")}
@@ -173,6 +186,9 @@ const Homepage = () => {
                   }}
                   onOrganizeButtonClick={() => {
                     handleDoubleConfirmationModal("organize");
+                  }}
+                  onWishlistButtonClick={() => {
+                    handleDrawerVisible();
                   }}
                 />
               ))}
