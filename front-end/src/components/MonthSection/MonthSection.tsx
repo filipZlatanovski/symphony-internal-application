@@ -14,11 +14,17 @@ const MonthSection: React.FC<MonthSectionProps> = ({ month, birthdays, onCardCli
       <Stack spacing={2}>
         {birthdays.map((b) => (
           <BirthdayCard 
-                key={b.id}
-                name={b.name}
-                lastName={b.lastName}
-                daysLeft={b.daysLeft}
-                onClick={() => onCardClick(b.id)} id={0}          />
+            key={b.id}
+            name={b.name}
+            lastName={b.lastName}
+            daysLeft={b.daysLeft} id={0} birthdayDate={""} onWishlistClick={function (id: number): void {
+              throw new Error("Function not implemented.");
+            } } onOrganize={function (id: number): void {
+              throw new Error("Function not implemented.");
+            } } onContribute={function (id: number): void {
+              throw new Error("Function not implemented.");
+            } }                // onClick={() => onCardClick(b.id)} id={0}          
+          />
         ))}
       </Stack>
     </Paper>
