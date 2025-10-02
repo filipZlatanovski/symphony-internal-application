@@ -1,42 +1,67 @@
-export const sidebarStyles = {
+export const sidebarBoxStyles = (open: boolean) => ({
   position: "fixed",
   left: 0,
   top: 0,
   bottom: 0,
-  width: { xs: 72, sm: 96 },
+  width: open ? 260 : 90,
   bgcolor: "#fff",
   borderRight: "1px solid #eee",
   display: "flex",
   flexDirection: "column",
-  alignItems: "center",
+  alignItems: "flex-start",
   py: 3,
-  px: 1,
+  px: 2,
   zIndex: 1000,
+  transition: "width 0.5s ease",
+});
+
+export const profileIconStyles = {
+  display: "flex",
+  alignItems: "center",
+  mb: 3,
+  cursor: "pointer",
+  width: "100%",
 };
 
-export const iconButtonStyles = {
-  mb: 3,
+export const profileIconButtonStyles = {
   bgcolor: "#6c69ff",
   color: "#fff",
-  width: { xs: 48, sm: 64 },
-  height: { xs: 48, sm: 64 },
+  width: 56,
+  height: 56,
   "&:hover": { bgcolor: "#6c69ff" },
 };
 
-export const wishlistIconStyles = {
+export const sidebarTextStyles = (open: boolean) => ({
+  ml: 2,
+  fontWeight: 500,
+  fontFamily: "Poppins, sans-serif",
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  opacity: open ? 1 : 0,
+  maxWidth: open ? 200 : 0,
+  transition: "all 0.5s ease",
+});
+
+export const iconButtonStyles = {
+  display: "flex",
+  alignItems: "center",
   mb: 3,
+  cursor: "pointer",
+  width: "100%",
+};
+
+export const wishlistIconStyles = {
   bgcolor: "#ffbe3d",
   color: "#000",
-  width: { xs: 48, sm: 64 },
-  height: { xs: 48, sm: 64 },
+  width: 56,
+  height: 56,
   "&:hover": { bgcolor: "#f0b02e" },
 };
 
 export const logoutButtonStyles = {
-  mb: 3,
   bgcolor: "#f4f5fb",
   color: "#ff4d4d",
-  width: { xs: 48, sm: 64 },
-  height: { xs: 48, sm: 64 },
+  width: 56,
+  height: 56,
   "&:hover": { bgcolor: "#fce4e4" },
 };
