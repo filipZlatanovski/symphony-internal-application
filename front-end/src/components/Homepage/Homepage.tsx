@@ -2,8 +2,8 @@ import { Box, Container, IconButton } from "@mui/material";
 import { Menu } from "@mui/icons-material";
 import { useState } from "react";
 import Sidebar from "../Sidebar/Sidebar";
-import StatsCard from "../StatsCard/StatsCard";
 import MonthSection from "../MonthSection/MonthSection";
+//import StatsCard from "../StatsCard/StatsCard";
 // import BirthdayModal from "../BirthdayModal/BirthdayModal";
 import OrganizerModal from "../OrganizerModal/OrganizerModal";
 import DoubleConfirmationModal from "../DoubleConfirmationModal/DoubleConfirmationModal";
@@ -40,15 +40,15 @@ const BIRTHDAYS_BY_MONTH = [
   },
 ];
 
-const STATS = [
-  { label: "Upcoming Birthdays", value: 3, sublabel: "Next 30 days" },
-  {
-    label: "Active Celebrations",
-    value: 2,
-    sublabel: "You're contributing to",
-  },
-  { label: "Team Members", value: 24, sublabel: "In your circle" },
-];
+// const STATS = [
+//   { label: "Upcoming Birthdays", value: 3, sublabel: "Next 30 days" },
+//   {
+//     label: "Active Celebrations",
+//     value: 2,
+//     sublabel: "You're contributing to",
+//   },
+//   { label: "Team Members", value: 24, sublabel: "In your circle" },
+// ];
 
 const Homepage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -136,31 +136,28 @@ const Homepage = () => {
           }}
         />
       )}
-      <Box sx={mainCardStyles}>
-        <Sidebar
+      <Box sx={{ display: "flex", minHeight: "100vh", backgroundColor: "#f4f5fb" }}>
+        <Sidebar 
+          open={sidebarOpen}
+          setOpen={setSidebarOpen}
           onLogout={() => console.log("Logout")}
-          onEditProfile={handleEditProfileModal}
-          onWishlist={function (): void {
-            throw new Error("Function not implemented.");
-          }}
-        />
-        <Box component="main" sx={sidebarStyles(sidebarOpen)}>
-          {!sidebarOpen && (
-            <IconButton
-              onClick={() => setSidebarOpen(true)}
-              sx={iconButtonStyles}
-            >
-              <Menu />
-            </IconButton>
-          )}
+          onEditProfile={() => console.log("Edit Profile")} 
+          onWishlist={() => console.log("Wishlist")} 
+          />
+        <Box component="main" sx={{ 
+          flexGrow: 1, 
+          p: 4, 
+          ml: sidebarOpen ? "260px" : "90px",
+          transition: "margin-left 0.4s ease-in-out",
+        }}>
           <Container maxWidth={false} sx={containerStatsStyles}>
             <TypographyText variant="h3" text="Welcome back, <name>!" />
-            {/* CSS Grid for stats */}
+            {/* CSS Grid for stats
             <Box sx={statsStyles}>
               {STATS.map((s, i) => (
                 <StatsCard key={i} {...s} />
               ))}
-            </Box>
+            </Box> */}
             {/* Simple Box for month sections */}
             <Box sx={monthSectionStyles}>
               {BIRTHDAYS_BY_MONTH.map((m, i) => (
