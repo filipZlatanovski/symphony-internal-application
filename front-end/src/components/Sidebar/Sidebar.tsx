@@ -9,6 +9,7 @@ import {
   wishlistIconStyles,
   logoutButtonStyles,
 } from "./sidebar.styles";
+import Tooltip from "../Tooltip/Tooltip";
 
 interface SidebarProps {
   open: boolean;
@@ -36,30 +37,32 @@ export default function Sidebar({
         {open && isMobile ? null : open ? <Close /> : <Menu />}
       </IconButton>
       <Box sx={profileIconStyles} onClick={onEditProfile}>
-        <IconButton sx={profileIconButtonStyles}>
-          <Edit />
-        </IconButton>
+        <Tooltip title="Edit Profile" placement="right" arrow>
+          <IconButton sx={profileIconButtonStyles}>
+            <Edit />
+          </IconButton>
+        </Tooltip>
         <Typography sx={sidebarTextStyles(open, isMobile)}>
           Edit Profile
         </Typography>
       </Box>
       <Box sx={iconButtonStyles} onClick={onWishlist}>
-        <IconButton sx={wishlistIconStyles}>
-          <CardGiftcard />
-        </IconButton>
+        <Tooltip title="My Wishlist" placement="right" arrow>
+          <IconButton sx={wishlistIconStyles}>
+            <CardGiftcard />
+          </IconButton>
+        </Tooltip>
         <Typography sx={sidebarTextStyles(open, isMobile)}>
           My Wishlist
         </Typography>
       </Box>
-
-      {/* Spacer */}
       <Box sx={{ flexGrow: 1 }} />
-
-      {/* Logout */}
       <Box sx={iconButtonStyles} onClick={onLogout}>
-        <IconButton sx={logoutButtonStyles}>
-          <Logout />
-        </IconButton>
+        <Tooltip title="Log Out" placement="right" arrow>
+          <IconButton sx={logoutButtonStyles}>
+            <Logout />
+          </IconButton>
+        </Tooltip>
         <Typography sx={sidebarTextStyles(open, isMobile)}>Logout</Typography>
       </Box>
     </Box>
