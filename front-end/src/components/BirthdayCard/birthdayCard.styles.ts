@@ -7,26 +7,32 @@ export const birthdayCardStyles = {
     borderColor: "#6c69ff",
     boxShadow: 6,
   },
+  width: { xs: "95%", sm: "100%" },
+  mx: { xs: "auto", sm: 0 },
+  padding: { xs: 2, sm: 3 },
 };
 
 export const birthdayCardTopRow = {
   display: "flex",
-  alignItems: "center",
   justifyContent: "space-between",
+  flexDirection: { xs: "column", sm: "row" },
+  alignItems: { xs: "center", sm: "center" },
+  textAlign: { xs: "center", sm: "left" },
+  gap: { xs: 2, sm: 0 },
 };
 
 export const birthdayCardAvatarStyles = {
-  width: 64,
-  height: 64,
   borderRadius: "50%",
   bgcolor: "#fe7475",
   color: "white",
   fontWeight: "bold",
-  fontSize: "1.25rem",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  mr: 2,
+  width: { xs: 64, sm: 64 },
+  height: { xs: 64, sm: 64 },
+  fontSize: { xs: "14px", sm: "16px" },
+  mr: { xs: 0, sm: 2 },
 };
 
 export const birthdayCardWishlistButtonStyles = {
@@ -35,11 +41,26 @@ export const birthdayCardWishlistButtonStyles = {
   "&:hover": { bgcolor: "#fe7475" },
   width: 50,
   height: 50,
+  mt: { xs: 1.5, sm: 0 },
+  alignSelf: { xs: "center", sm: "flex-start" },
 };
 
 export const birthdayCardButtonsContainer = {
   display: "flex",
-  justifyContent: "flex-end",
   mt: 3,
-  gap: 2,
+  flexDirection: { xs: "column", sm: "row" },
+  justifyContent: { xs: "center", sm: "flex-end" },
+  gap: { xs: 1.2, sm: 2 },
+  px: { xs: "50px", sm: "55px", lg: 0, xl: 0 },
+};
+
+export const birthdayCardTypographyStyles = {
+  fontWeight: "bold",
+  fontSize: { xs: "14px", sm: "16px", xl: "20px" },
+  fontFamily: "Poppins",
+};
+
+export const birthdayCardDaysLeftTextStyles = {
+  fontSize: { xs: "12px", sm: "14px", xl: "15px" },
+  fontFamily: "Poppins",
 };

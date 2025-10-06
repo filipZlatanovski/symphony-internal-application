@@ -53,15 +53,7 @@ export default function WishlistContent() {
     <div className="flex justify-center items-center mt-[2rem] bg-[#f4f5fb] border border-gray-300 rounded-lg px-4 py-3">
       <ul className="list-disc mx-5">
         {wishlists.map((item) => (
-          <motion.li
-            key={item.id}
-            initial={{
-              y: 0,
-            }}
-            whileHover={{
-              y: -1.2,
-            }}
-          >
+          <motion.li key={item.id} initial={{ y: 0 }} whileHover={{ y: -1.2 }}>
             <p className="cursor-default">
               {item.title} - {item.price}
             </p>

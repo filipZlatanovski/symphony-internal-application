@@ -81,7 +81,7 @@ export default function WishlistDrawer({
         ))}
       </List>
       {isMobile && (
-        <div className="flex justify-center items-center pt-[3rem]">
+        <div className="flex justify-center items-center pt-[2rem]">
           <Button
             type="button"
             handleClick={onClose}

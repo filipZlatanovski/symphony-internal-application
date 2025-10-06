@@ -9,10 +9,10 @@ export const monthSelectionContainer = {
 };
 
 export const monthSelectionMonthText = {
-  mb: 4,
+  mb: 2,
   ml: 0.5,
   fontWeight: 700,
-  fontSize: { xs: "2rem", sm: "2.25rem", md: "2.5rem" },
+  fontSize: { xs: "22px", sm: "26px", md: "30px", xl: "35px" },
   textAlign: { xs: "center", md: "left" },
   fontFamily: "Poppins",
 };

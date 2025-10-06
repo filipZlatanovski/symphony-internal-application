@@ -35,16 +35,16 @@ export const statsStyles = {
 };
 
 export const containerStatsStyles = {
-  maxWidth: "none !important",
+  paddingTop: 2,
   px: { xs: 2, sm: 3, md: 4 },
 };
 
-export const sidebarStyles = (sidebar: boolean) => ({
+export const sidebarStyles = (sidebarOpen: boolean) => ({
   flexGrow: 1,
   p: 4,
-  ml: sidebar ? "100px" : 0,
+  ml: sidebarOpen ? "100px" : 0,
   transition: "margin-left 0.3s ease-in-out",
-  width: sidebar ? "calc(100% - 10px)" : "100%",
+  width: sidebarOpen ? "calc(100% - 10px)" : "100%",
 });
 
 export const typographyTextStyles = {
@@ -52,11 +52,11 @@ export const typographyTextStyles = {
   fontWeight: 700,
   mb: 5,
   fontSize: {
-    xs: "2rem",
-    sm: "2.25rem",
-    md: "2.5rem",
-    lg: "2.75rem",
-    xl: "3rem",
+    xs: "20px",
+    sm: "25px",
+    md: "30px",
+    lg: "35px",
+    xl: "40px",
   },
   lineHeight: {
     xs: 1.2,
@@ -75,17 +75,17 @@ export const typographyTextStyles = {
 
 export const homepageFirstBoxStyles = {
   display: "flex",
+  flexDirection: "column",
   minHeight: "100vh",
+  width: "100%",
+  overflowX: "hidden",
   backgroundColor: "#f4f5fb",
 };
 
 export const hompageBoxContainerStyles = (sidebarOpen: boolean) => ({
   flexGrow: 1,
-  p: { xs: 2, sm: 3, md: 4 },
-  ml: {
-    xs: 0,
-    sm: sidebarOpen ? "260px" : "90px",
-  },
+  p: { xs: 1, sm: 3, md: 4 },
+  ml: { xs: 0, sm: sidebarOpen ? "250px" : "90px" },
   transition: "margin-left 0.4s ease-in-out",
 });
 

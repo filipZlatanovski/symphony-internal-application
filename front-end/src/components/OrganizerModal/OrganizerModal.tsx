@@ -34,12 +34,16 @@ export default function OrganizerModal({
       <Box sx={organizerModal}>
         {isMobile ? "" : <CloseButton onClose={onClose} />}
         {/* this should be wrapped in a form component later on */}
-        <div className="text-center mt-5">
-          <TypographyText text="One Step Closer!" variant="h3" />
+        <div className="text-center mt-5 pt-[1.2rem]">
+          <TypographyText text="One Step Closer!" variant="h2" />
         </div>
         <InputField
           type="number"
-          placeholder="Enter your bank details - e.g 30000XXX"
+          placeholder={
+            isMobile
+              ? "Transaction Account Number"
+              : "Enter your bank details - e.g 30000XXX"
+          }
           htmlFor="aria-bankDetails-label"
           htmlId="aria-bankDetails-label"
           label="Bank Details"

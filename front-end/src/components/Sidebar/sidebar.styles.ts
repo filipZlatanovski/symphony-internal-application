@@ -13,8 +13,8 @@ export const sidebarBoxStyles = (
       alignItems: "center",
       flexDirection: "column",
       height: "70vh",
-      py: 3,
-      px: 2,
+      py: "15px",
+      px: "10px",
       bgcolor: "#fff",
       boxSizing: "border-box",
       overflowY: "auto",
@@ -49,14 +49,13 @@ export const sidebarOverlayStyles = (open: boolean, isMobile: boolean) => ({
   right: 0,
   bottom: 0,
   bgcolor: "rgba(0, 0, 0, 0.5)",
-  zIndex: 1200,
   transition: "opacity 0.3s ease",
 });
 
 export const hamburgerButtonStyles = {
   position: "fixed",
-  top: 16,
-  left: 16,
+  top: 15,
+  left: 15,
   bgcolor: "#6c69ff",
   color: "#fff",
   width: 48,

@@ -31,7 +31,7 @@ export default function DoubleConfirmationModal({
               variant="h6"
             />
           </div>
-          <p className="text-center pt-5 pb-10">
+          <p className="text-center pt-5 pb-10 text-sm sm:text-sm md:text-lg">
             8/26 people have already contributed!
           </p>
           <div className="flex justify-around items-center">

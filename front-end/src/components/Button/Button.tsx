@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import buttonStyles from "./Button.styles";
+import { buttonStyles } from "./Button.styles";
 
 interface ButtonProps {
   content: string;
@@ -26,7 +26,7 @@ export default function Button({
         y: -5,
         transition: { duration: 0.02 },
       }}
-      className={`${buttonStyles[variant]} px-6 py-3 rounded-xl font-[Poppins] text-base font-medium transition-all`}
+      className={`${buttonStyles[variant]} px-6 py-3 rounded-xl font-[Poppins] text-sm sm:text-base font-medium transition-all`}
       disabled={disabled}
       onClick={handleClick}
     >

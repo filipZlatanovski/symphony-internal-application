@@ -57,7 +57,7 @@ const BIRTHDAYS_BY_MONTH = [
 // ];
 
 const Homepage = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   // const [isBirthdayModalOpen, setIsBirthdayModalOpen] =
   //   useState<boolean>(false);
   const [isOrganizerModalOpen, setIsOrganizerModalOpen] =
