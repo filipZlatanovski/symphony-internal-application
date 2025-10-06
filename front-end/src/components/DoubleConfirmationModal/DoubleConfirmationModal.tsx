@@ -5,6 +5,7 @@ import TypographyText from "../TypographyText/TypographyText";
 
 interface DoubleConfirmationModal {
   isOpen: boolean;
+  isMobile: boolean;
   onClose: () => void;
   type: "organize" | "contribute" | undefined;
   openOrganizerModal: () => void;
@@ -13,6 +14,7 @@ interface DoubleConfirmationModal {
 
 export default function DoubleConfirmationModal({
   isOpen,
+  isMobile,
   onClose,
   type,
   openOrganizerModal,
@@ -22,7 +24,7 @@ export default function DoubleConfirmationModal({
     <ModalContainer open={isOpen} onClose={onClose}>
       {type === "contribute" ? (
         <>
-          <CloseButton onClose={onClose} />
+          {isMobile ? "" : <CloseButton onClose={onClose} />}
           <div className="pt-5 text-center">
             <TypographyText
               text={`Are you sure you want to contribute to <name's> birthday gift?`}
@@ -49,7 +51,7 @@ export default function DoubleConfirmationModal({
         </>
       ) : (
         <>
-          <CloseButton onClose={onClose} />
+          {isMobile ? "" : <CloseButton onClose={onClose} />}
           <div className="pt-5 text-center">
             <TypographyText
               text={`Are you sure you want to organize <name's> birthday gift?`}

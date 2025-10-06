@@ -9,12 +9,14 @@ import type { ChangeEvent } from "react";
 
 interface OrganizerModalProps {
   isOpen: boolean;
+  isMobile: boolean;
   onClose: () => void;
   onSubmit: () => void;
 }
 
 export default function OrganizerModal({
   isOpen,
+  isMobile,
   onClose,
   onSubmit,
 }: OrganizerModalProps) {
@@ -30,7 +32,7 @@ export default function OrganizerModal({
   return (
     <Modal open={isOpen} onClose={onClose}>
       <Box sx={organizerModal}>
-        <CloseButton onClose={onClose} />
+        {isMobile ? "" : <CloseButton onClose={onClose} />}
         {/* this should be wrapped in a form component later on */}
         <div className="text-center mt-5">
           <TypographyText text="One Step Closer!" variant="h3" />
@@ -44,7 +46,7 @@ export default function OrganizerModal({
           value={bankDetails}
           onValueChange={handleBankDetailsChange}
         />
-        <div className="flex justify-center items-center mt-5">
+        <div className="flex justify-center items-center mt-5 gap-[3rem]">
           <Button
             variant={`${isFormValid ? "disabled" : "primary"}`}
             type="submit"
@@ -52,6 +54,14 @@ export default function OrganizerModal({
             handleClick={onSubmit}
             disabled={isFormValid}
           />
+          {isMobile && (
+            <Button
+              variant="secondary"
+              type="button"
+              content="Close"
+              handleClick={onClose}
+            />
+          )}
         </div>
       </Box>
     </Modal>

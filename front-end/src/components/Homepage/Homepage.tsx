@@ -1,16 +1,29 @@
-import { Box, Container } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  useTheme,
+  useMediaQuery,
+  IconButton,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import Sidebar from "../Sidebar/Sidebar";
 import MonthSection from "../MonthSection/MonthSection";
-//import StatsCard from "../StatsCard/StatsCard";
-// import BirthdayModal from "../BirthdayModal/BirthdayModal";
 import OrganizerModal from "../OrganizerModal/OrganizerModal";
 import DoubleConfirmationModal from "../DoubleConfirmationModal/DoubleConfirmationModal";
 import { toast, Toaster } from "react-hot-toast";
-import { monthSectionStyles, containerStatsStyles } from "./homepage.styles";
-import TypographyText from "../TypographyText/TypographyText";
+import {
+  monthSectionStyles,
+  containerStatsStyles,
+  typographyTextStyles,
+  hompageBoxContainerStyles,
+  homepageFirstBoxStyles,
+  hamburgerButtonStyles,
+} from "./homepage.styles";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import WishlistDrawer from "../WishlistDrawer/WishlistDrawer";
+import { Close } from "@mui/icons-material";
 
 const BIRTHDAYS_BY_MONTH = [
   {
@@ -58,6 +71,9 @@ const Homepage = () => {
     useState<boolean>(false);
   const [drawerVisible, setDrawerVisible] = useState<boolean>(false);
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   const handleDrawerVisible = () => {
     setDrawerVisible((prevState) => !prevState);
   };
@@ -103,6 +119,7 @@ const Homepage = () => {
       />
       {isOrganizerModalOpen && (
         <OrganizerModal
+          isMobile={isMobile}
           isOpen={isOrganizerModalOpen}
           onClose={() => {
             closeAllModals();
@@ -117,6 +134,7 @@ const Homepage = () => {
       {isDoubleConfirmationModalOpen && (
         <DoubleConfirmationModal
           isOpen={isDoubleConfirmationModalOpen}
+          isMobile={isMobile}
           onClose={handeDoubleConfirmationModalClose}
           type={confirmationType}
           openOrganizerModal={handleOrganizerModal}
@@ -135,39 +153,34 @@ const Homepage = () => {
       )}
       {drawerVisible && (
         <WishlistDrawer
+          isMobile={isMobile}
           anchor="right"
           isOpen={drawerVisible}
           onClose={handleDrawerVisible}
         />
       )}
-      <Box
-        sx={{ display: "flex", minHeight: "100vh", backgroundColor: "#f4f5fb" }}
-      >
+      <Box sx={homepageFirstBoxStyles}>
+        {isMobile && (
+          <IconButton
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            sx={hamburgerButtonStyles}
+          >
+            {isMobile && sidebarOpen ? <Close /> : <MenuIcon />}
+          </IconButton>
+        )}
         <Sidebar
           open={sidebarOpen}
+          isMobile={isMobile}
           setOpen={setSidebarOpen}
           onLogout={() => console.log("Logout")}
           onEditProfile={handleEditProfileModal}
           onWishlist={() => console.log("Wishlist")}
         />
-        <Box
-          component="main"
-          sx={{
-            flexGrow: 1,
-            p: 4,
-            ml: sidebarOpen ? "260px" : "90px",
-            transition: "margin-left 0.4s ease-in-out",
-          }}
-        >
+        <Box component="main" sx={hompageBoxContainerStyles(sidebarOpen)}>
           <Container maxWidth={false} sx={containerStatsStyles}>
-            <TypographyText variant="h3" text="Welcome back, <name>!" />
-            {/* CSS Grid for stats
-            <Box sx={statsStyles}>
-              {STATS.map((s, i) => (
-                <StatsCard key={i} {...s} />
-              ))}
-            </Box> */}
-            {/* Simple Box for month sections */}
+            <Typography variant="h3" sx={typographyTextStyles}>
+              Welcome back, name!
+            </Typography>
             <Box sx={monthSectionStyles}>
               {BIRTHDAYS_BY_MONTH.map((m, i) => (
                 <MonthSection

@@ -48,12 +48,12 @@ export default function App() {
           }}
         />
         <Homepage />
-        <button
+        {/* <button
           onClick={toggleView}
           className="fixed top-4 right-4 bg-[#fe7475] text-white px-4 py-2 rounded-lg z-50"
         >
           Show Login
-        </button>
+        </button> */}
         {/* <button
           className="fixed top-40 right-4 bg-[#fe7475] text-white px-4 py-2 rounded-lg z-50"
           onClick={handleOpenEditProfileModal}

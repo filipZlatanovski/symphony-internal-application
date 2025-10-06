@@ -1,5 +1,11 @@
-import { Paper, Typography, Stack } from "@mui/material";
+import { Paper, Typography, Stack, Box } from "@mui/material";
 import BirthdayCard from "../BirthdayCard/BirthdayCard.tsx";
+import {
+  monthSelectionContainer,
+  monthSelectionMonthText,
+  monthSelectionStack,
+  monthSelectionBox,
+} from "./monthSelection.styles.ts";
 
 interface MonthSectionProps {
   month: string;
@@ -9,35 +15,32 @@ interface MonthSectionProps {
   onWishlistButtonClick: (id: number) => void;
 }
 
-const MonthSection: React.FC<MonthSectionProps> = ({
+export default function MonthSection({
   month,
   birthdays,
   onContributeButtonClick,
   onOrganizeButtonClick,
   onWishlistButtonClick,
-}) => {
+}: MonthSectionProps) {
   return (
-    <Paper sx={{ p: 3, borderRadius: 3 }}>
-      <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>
-        {month}
-      </Typography>
-      <Stack spacing={2}>
+    <Paper sx={monthSelectionContainer}>
+      <Typography sx={monthSelectionMonthText}>{month}</Typography>
+      <Stack spacing={2} sx={monthSelectionStack}>
         {birthdays.map((b) => (
-          <BirthdayCard
-            key={b.id}
-            name={b.name}
-            lastName={b.lastName}
-            daysLeft={b.daysLeft}
-            id={0}
-            birthdayDate={""}
-            onWishlistClick={onWishlistButtonClick}
-            onOrganize={onOrganizeButtonClick}
-            onContribute={onContributeButtonClick}
-          />
+          <Box key={b.id} sx={monthSelectionBox}>
+            <BirthdayCard
+              name={b.name}
+              lastName={b.lastName}
+              daysLeft={b.daysLeft}
+              id={b.id}
+              birthdayDate={""}
+              onWishlistClick={onWishlistButtonClick}
+              onOrganize={onOrganizeButtonClick}
+              onContribute={onContributeButtonClick}
+            />
+          </Box>
         ))}
       </Stack>
     </Paper>
   );
-};
-
-export default MonthSection;
+}

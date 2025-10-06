@@ -1,11 +1,4 @@
-import {
-  Box,
-  Drawer,
-  List,
-  ListItem,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Drawer, List, ListItem } from "@mui/material";
 import TypographyText from "../TypographyText/TypographyText";
 import CloseButton from "../CloseButton/CloseButton";
 import {
@@ -13,6 +6,7 @@ import {
   drawerMobileStyles,
   wishlistItemsStyles,
 } from "./drawer.styles";
+import Button from "../Button/Button";
 
 interface WishlistItems {
   id: number;
@@ -24,6 +18,7 @@ interface WishlistItems {
 
 interface DrawerProps {
   isOpen: boolean;
+  isMobile: boolean;
   onClose: () => void;
   anchor: "top" | "right" | "bottom" | "left";
 }
@@ -67,14 +62,15 @@ const wishlists: WishlistItems[] = [
   },
 ];
 
-export default function WishlistDrawer({ isOpen, onClose }: DrawerProps) {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
+export default function WishlistDrawer({
+  isOpen,
+  onClose,
+  isMobile,
+}: DrawerProps) {
   const DrawerList = (
     <Box>
       <List>
-        <CloseButton onClose={onClose} />
+        {isMobile ? "" : <CloseButton onClose={onClose} />}
         <div className="mt-[3rem] px-3 text-center">
           <TypographyText text={`<name's> Wishlist`} variant="h4" />
         </div>
@@ -84,6 +80,16 @@ export default function WishlistDrawer({ isOpen, onClose }: DrawerProps) {
           </ListItem>
         ))}
       </List>
+      {isMobile && (
+        <div className="flex justify-center items-center pt-[3rem]">
+          <Button
+            type="button"
+            handleClick={onClose}
+            content="Close"
+            variant="secondary"
+          />
+        </div>
+      )}
     </Box>
   );
 
