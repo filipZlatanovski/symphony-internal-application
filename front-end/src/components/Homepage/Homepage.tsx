@@ -30,18 +30,18 @@ const BIRTHDAYS_BY_MONTH = [
     month: "October 2025",
     birthdays: [
       { id: 1, name: "John", lastName: "Doe", daysLeft: 8 },
-      { id: 1, name: "John", lastName: "Doe", daysLeft: 13 },
-      { id: 1, name: "John", lastName: "Doe", daysLeft: 15 },
-      { id: 1, name: "John", lastName: "Doe", daysLeft: 18 },
+      { id: 2, name: "John", lastName: "Doe", daysLeft: 13 },
+      { id: 3, name: "John", lastName: "Doe", daysLeft: 15 },
+      { id: 4, name: "John", lastName: "Doe", daysLeft: 18 },
     ],
   },
   {
     month: "November 2025",
     birthdays: [
-      { id: 2, name: "Sarah", lastName: "Smith", daysLeft: 22 },
-      { id: 3, name: "Jane", lastName: "Johnson", daysLeft: 26 },
-      { id: 4, name: "Pam", lastName: "Beasly", daysLeft: 36 },
-      { id: 5, name: "Lila", lastName: "Slay", daysLeft: 77 },
+      { id: 5, name: "Sarah", lastName: "Smith", daysLeft: 22 },
+      { id: 6, name: "Jane", lastName: "Johnson", daysLeft: 26 },
+      { id: 7, name: "Pam", lastName: "Beasly", daysLeft: 36 },
+      { id: 8, name: "Lila", lastName: "Slay", daysLeft: 77 },
     ],
   },
 ];
@@ -70,6 +70,15 @@ const Homepage = () => {
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] =
     useState<boolean>(false);
   const [drawerVisible, setDrawerVisible] = useState<boolean>(false);
+  // This will change once the DB data kicks in, it will be a string[]
+  const [contributedBirthdayIds, setContributedBirthdayIds] = useState<
+    number[]
+  >([]);
+  // This aswell, string only
+  const [activeBirtdayId, setActiveBirthdayId] = useState<number | null>(3);
+  const [organizedBirthdayIds, setOrganizedBirthdayIds] = useState<number[]>(
+    []
+  );
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -89,8 +98,13 @@ const Homepage = () => {
     setIsDoubleConfirmationModalOpen((prevState) => !prevState);
   };
 
-  const handleDoubleConfirmationModal = (type: "contribute" | "organize") => {
+  const handleDoubleConfirmationModal = (
+    type: "contribute" | "organize",
+    // This should change to string once real data gets involved
+    id?: number
+  ) => {
     setConfirmationType(type);
+    setActiveBirthdayId(Number(id));
     setIsDoubleConfirmationModalOpen((prevState) => !prevState);
   };
 
@@ -99,8 +113,25 @@ const Homepage = () => {
     setIsDoubleConfirmationModalOpen((prevState) => !prevState);
   };
 
+  const confirmBirthdayOrganization = () => {
+    if (activeBirtdayId && !organizedBirthdayIds.includes(activeBirtdayId)) {
+      setOrganizedBirthdayIds((prev) => [...prev, Number(activeBirtdayId)]);
+    }
+
+    setIsOrganizerModalOpen(false);
+    setIsDoubleConfirmationModalOpen(false);
+    setConfirmationType(undefined);
+    setActiveBirthdayId(null);
+    toast.success(`You are now the organizer of <name's> birthday!`);
+  };
+
   const confirmBirthdayContribution = () => {
+    if (activeBirtdayId && !contributedBirthdayIds.includes(activeBirtdayId)) {
+      setContributedBirthdayIds((prev) => [...prev, activeBirtdayId]);
+    }
     setIsDoubleConfirmationModalOpen((prevState) => !prevState);
+    setConfirmationType(undefined);
+    setActiveBirthdayId(null);
     toast.success(`You are contributing to <name's> birthday gift!`);
   };
 
@@ -125,9 +156,7 @@ const Homepage = () => {
             closeAllModals();
           }}
           onSubmit={() => {
-            console.log("data sumbiting from organzier modal");
-            closeAllModals();
-            toast.success(`You are now the organizer of <name's> birthday!`);
+            confirmBirthdayOrganization();
           }}
         />
       )}
@@ -144,6 +173,7 @@ const Homepage = () => {
       {isEditProfileModalOpen && (
         <EditProfileModal
           isOpen={isEditProfileModalOpen}
+          isMobile={isMobile}
           onClose={handleEditProfileModal}
           onSubmit={() => {
             handleEditProfileModal();
@@ -188,12 +218,20 @@ const Homepage = () => {
                   month={m.month}
                   birthdays={m.birthdays}
                   onContributeButtonClick={() => {
-                    handleDoubleConfirmationModal("contribute");
+                    handleDoubleConfirmationModal(
+                      "contribute",
+                      Number(activeBirtdayId)
+                    );
                   }}
                   onOrganizeButtonClick={() => {
-                    handleDoubleConfirmationModal("organize");
+                    handleDoubleConfirmationModal(
+                      "organize",
+                      Number(activeBirtdayId)
+                    );
                   }}
                   onWishlistButtonClick={handleDrawerVisible}
+                  contributorDisabledIds={contributedBirthdayIds}
+                  organizerDisabledIds={organizedBirthdayIds}
                 />
               ))}
             </Box>

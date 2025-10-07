@@ -13,6 +13,9 @@ interface MonthSectionProps {
   onOrganizeButtonClick: (id: number) => void;
   onContributeButtonClick: (id: number) => void;
   onWishlistButtonClick: (id: number) => void;
+  // These 2 will change to string[]
+  contributorDisabledIds: number[];
+  organizerDisabledIds: number[];
 }
 
 export default function MonthSection({
@@ -21,6 +24,8 @@ export default function MonthSection({
   onContributeButtonClick,
   onOrganizeButtonClick,
   onWishlistButtonClick,
+  contributorDisabledIds,
+  organizerDisabledIds,
 }: MonthSectionProps) {
   return (
     <Paper sx={monthSelectionContainer}>
@@ -37,6 +42,8 @@ export default function MonthSection({
               onWishlistClick={onWishlistButtonClick}
               onOrganize={onOrganizeButtonClick}
               onContribute={onContributeButtonClick}
+              contributorDisabledIds={contributorDisabledIds}
+              organizerDisabledIds={organizerDisabledIds}
             />
           </Box>
         ))}

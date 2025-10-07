@@ -7,12 +7,14 @@ import ModalContainer from "../ModalContainer/ModalContainer";
 
 interface EditProfileModalProps {
   isOpen: boolean;
+  isMobile: boolean;
   onClose: () => void;
   onSubmit: () => void;
 }
 
 export default function EditProfileModal({
   isOpen,
+  isMobile,
   onClose,
   onSubmit,
 }: EditProfileModalProps) {
@@ -33,7 +35,7 @@ export default function EditProfileModal({
   // this will also be wrapped in a form input later on
   return (
     <ModalContainer open={isOpen} onClose={onClose}>
-      <CloseButton onClose={onClose} />
+      {isMobile ? "" : <CloseButton onClose={onClose} />}
       <div className="text-center">
         <TypographyText text="Edit Profile" variant="h3" />
       </div>
@@ -55,8 +57,18 @@ export default function EditProfileModal({
         value={bankDetails}
         onValueChange={handleBankDetailsChange}
       />
-      <div className="flex justify-center items-center mt-5">
+      <div className="flex justify-center items-center mt-5 gap-10">
         <Button type="submit" content="Submit" handleClick={onSubmit} />
+        {isMobile ? (
+          <Button
+            type="button"
+            content="Close"
+            handleClick={onClose}
+            variant="secondary"
+          />
+        ) : (
+          ""
+        )}
       </div>
     </ModalContainer>
   );

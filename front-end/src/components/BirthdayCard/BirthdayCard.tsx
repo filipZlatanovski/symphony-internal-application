@@ -22,6 +22,9 @@ interface BirthdayCardProps {
   onWishlistClick: (id: number) => void;
   onOrganize: (id: number) => void;
   onContribute: (id: number) => void;
+  // These 2 will change to string[]
+  contributorDisabledIds: number[];
+  organizerDisabledIds: number[];
 }
 
 const BirthdayCard = ({
@@ -33,7 +36,12 @@ const BirthdayCard = ({
   onWishlistClick,
   onOrganize,
   onContribute,
+  contributorDisabledIds,
+  organizerDisabledIds,
 }: BirthdayCardProps) => {
+  const hasContributed = contributorDisabledIds.includes(id);
+  const hasOrganized = organizerDisabledIds.includes(id);
+
   return (
     <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
       <Paper sx={birthdayCardStyles}>
@@ -77,12 +85,14 @@ const BirthdayCard = ({
             content="Organize"
             handleClick={() => onOrganize(id)}
             variant="primary"
+            disabled={hasOrganized}
           />
           <Button
             type="button"
             content="Contribute"
             handleClick={() => onContribute(id)}
             variant="secondary"
+            disabled={hasContributed}
           />
         </Box>
       </Paper>
